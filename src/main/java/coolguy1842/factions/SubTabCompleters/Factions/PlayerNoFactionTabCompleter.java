@@ -17,11 +17,13 @@ public class PlayerNoFactionTabCompleter {
 
         switch(args.length) {
         case 1:
+            out.add("help");
             out.add("create");
             out.add("accept");
+            out.add("deny");
             break;
         case 2:
-            if(args[0].equals("accept")) {
+            if(args[0].equals("accept") || args[0].equals("deny")) {
                 for(UUID id : FactionsManager.getInstance().inviteManager.getPlayerInvites(p)) {
                     Faction faction = FactionsManager.getInstance().factionManager.getFaction(id);
 

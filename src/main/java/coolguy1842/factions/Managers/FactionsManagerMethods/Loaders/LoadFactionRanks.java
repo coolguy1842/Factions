@@ -44,6 +44,7 @@ public class LoadFactionRanks {
             manager.rankManager.ranks.put(id, rank);
 
             if(isDefault) faction.setDefaultRank(id);
+            faction.ranks.put(id, rank);
 
             return rank;
         } catch (SQLException e) {

@@ -36,6 +36,8 @@ public class LoadFactionInvites {
 
         if(!manager.inviteManager.invites.containsKey(id)) manager.inviteManager.invites.put(id, new ArrayList<UUID>());
         manager.inviteManager.invites.get(id).add(factionID);
+
+        manager.factionManager.getFaction(factionID).invites.add(id);
         
         return invite;
     }

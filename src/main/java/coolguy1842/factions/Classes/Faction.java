@@ -1,8 +1,11 @@
 package coolguy1842.factions.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
 import net.kyori.adventure.text.Component;
@@ -17,7 +20,10 @@ public class Faction {
     private Long money;
 
     private HashMap<String, Object> options;
+
     public HashMap<UUID, FactionPlayer> players;
+    public HashMap<UUID, FactionRank> ranks;
+    public ArrayList<UUID> invites;
 
     public Faction(UUID id, String displayName, UUID leader, Long money) {
         this.id = id;
@@ -26,9 +32,12 @@ public class Faction {
         this.leader = leader;
 
         this.money = money;
-        this.players = new HashMap<>();
 
         this.options = FactionsManager.getInstance().factionManager.getFactionOptions(this.id);
+        
+        this.players = new HashMap<>();
+        this.ranks = new HashMap<>();
+        this.invites = new ArrayList<>();
     }
 
     
@@ -60,7 +69,10 @@ public class Faction {
     }
     
     public void setDisplayName(String displayName) {
+        FactionsManager.getInstance().factionManager.factionsNameLookup.remove(this.displayName);
+
         this.displayName = displayName;
+        FactionsManager.getInstance().factionManager.factionsNameLookup.put(this.displayName, this.id);
         FactionsManager.getInstance().factionManager.setFactionDisplayName(this.id, displayName);
     }
 
@@ -96,5 +108,57 @@ public class Faction {
 
     public Boolean hasPlayer(UUID playerID) {
         return this.players.containsKey(playerID);
+    }
+
+    public Boolean hasDefaultRank() {
+        return this.defaultRank != null;
+    }
+
+    
+    public Boolean hasInvite(UUID player) {
+        return this.invites.contains(player);
+    }
+    
+    public Boolean hasInvite(Player player) {
+        return this.invites.contains(player.getUniqueId());
+    }
+
+
+    public void addInvite(Player player) {
+        if(this.hasInvite(player)) return;
+
+        this.invites.add(player.getUniqueId());
+        FactionsManager.getInstance().inviteManager.createFactionInvite(player, this.id);
+    }
+    
+    public void addInvite(UUID player) {
+        if(this.hasInvite(player)) return;
+        
+        this.invites.add(player);
+        FactionsManager.getInstance().inviteManager.createFactionInvite(player, this.id);
+    }
+    
+
+    public void removeInvite(Player player) {
+        if(!this.hasInvite(player)) return;
+
+        this.invites.remove(player.getUniqueId());
+        FactionsManager.getInstance().inviteManager.deletePlayerInvite(player, this.id);
+    }
+    
+    public void removeInvite(UUID player) {
+        if(!this.hasInvite(player)) return;
+        
+        this.invites.remove(player);
+        FactionsManager.getInstance().inviteManager.deletePlayerInvite(player, this.id);
+    }
+
+    
+    public void removeAllInvites() {
+        for(UUID invite : this.invites) {
+            FactionsManager.getInstance().inviteManager.deletePlayerInvite(invite, this.id);
+        }
+
+        this.invites.clear();
     }
 }

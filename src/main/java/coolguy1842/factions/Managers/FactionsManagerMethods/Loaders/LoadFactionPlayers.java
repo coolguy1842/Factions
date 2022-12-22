@@ -43,7 +43,9 @@ public class LoadFactionPlayers {
             FactionPlayer player = new FactionPlayer(id, faction, rank, money);
 
             manager.playerManager.players.put(id, player);
-            if(faction != null) faction.players.put(id, player);
+            
+            if(player.inFaction()) player.getFaction().players.put(id, player);
+            if(player.hasRank()) player.getRank().players.put(id, player);
 
             return player;
         } catch (SQLException e) {

@@ -20,7 +20,7 @@ public class FactionsTabCompleter implements TabCompleter {
             Player p = (Player)sender;
             FactionPlayer player = FactionsManager.getInstance().playerManager.getPlayer(p.getUniqueId());
 
-            if(player.getFaction() == null) return PlayerNoFactionTabCompleter.onTabComplete(p, player, command, label, args);
+            if(!player.inFaction()) return PlayerNoFactionTabCompleter.onTabComplete(p, player, command, label, args);
             else return PlayerWithFactionTabCompleter.onTabComplete(p, player, command, label, args);
         }
 

@@ -1,8 +1,10 @@
-package coolguy1842.factions.SubCommands.Factions.WithFaction;
+package coolguy1842.factions.SubCommands.Factions.InFaction;
 
 import org.bukkit.entity.Player;
 
+import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
+import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 
 enum RenameCommandMessages {
@@ -17,24 +19,24 @@ public class FactionRenameCommand {
         Component.text("You are not in a faction."),
         Component.text("You do not have the permissions to rename this faction."),
         Component.text("You must specify a new name."),
-        Component.text("Faction renamed successfully!"),
+        Component.text("Renamed the faction."),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
-        if(player.getFaction() == null) {
-            p.sendMessage(commandMessages[RenameCommandMessages.NOTINFACTION.ordinal()]);
+        if(!player.inFaction()) {
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RenameCommandMessages.NOTINFACTION.ordinal()]);
             return;
         }
         else if(!player.hasPermission("rename")) {
-            p.sendMessage(commandMessages[RenameCommandMessages.NOPERMISSIONS.ordinal()]);
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RenameCommandMessages.NOPERMISSIONS.ordinal()]);
             return;
         }
         else if(args.length <= 1) {
-            p.sendMessage(commandMessages[RenameCommandMessages.NOARGS.ordinal()]);
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RenameCommandMessages.NOARGS.ordinal()]);
             return;
         }
 
         player.getFaction().setDisplayName(args[1]);
-        p.sendMessage(commandMessages[RenameCommandMessages.SUCCESS.ordinal()]);
+        FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RenameCommandMessages.SUCCESS.ordinal()]);
     }
 }

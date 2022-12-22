@@ -25,6 +25,8 @@ public class QueryCommand implements CommandExecutor {
             String sql = String.join(" ", args);
 
             CachedRowSet rows = FactionsManager.getInstance().database.query(sql);
+            if(rows == null) return true;
+            else if(rows.size() <= 0) return true;
 
             try {
                 ResultSetMetaData meta = rows.getMetaData();

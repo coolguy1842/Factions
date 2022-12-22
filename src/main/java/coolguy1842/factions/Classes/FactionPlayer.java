@@ -2,6 +2,9 @@ package coolguy1842.factions.Classes;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class FactionPlayer {
@@ -45,33 +48,52 @@ public class FactionPlayer {
     public Boolean hasRank() { return this.rank != null; } 
 
 
+    public Player getPlayer() { return Bukkit.getPlayer(this.id); }
+
+
     public void setMoney(Long money) { 
         this.money = money;
 
         FactionsManager.getInstance().playerManager.setPlayerMoney(this.id, money);
     }
 
-    public void setRank(UUID rankID) { 
-        FactionRank rank = FactionsManager.getInstance().rankManager.getRank(rankID);
 
-        this.rank = rank;
-        FactionsManager.getInstance().playerManager.setPlayerRank(this.id, rankID);;
+    public void setRank(UUID rankID) { 
+        if(this.hasRank()) this.rank.players.remove(this.id);
+
+        this.rank = FactionsManager.getInstance().rankManager.getRank(rankID);
+        if(this.hasRank()) this.rank.players.put(this.id, this);
+
+        FactionsManager.getInstance().playerManager.setPlayerRank(this.id, rankID);
     }
+
     
     public void setFaction(UUID factionID) { 
-        Faction faction = FactionsManager.getInstance().factionManager.getFaction(factionID);
+        if(this.inFaction()) this.faction.players.remove(this.id);
 
-        this.faction = faction;
+        this.faction = FactionsManager.getInstance().factionManager.getFaction(factionID);
+        if(this.inFaction()) this.faction.players.put(this.id, this);
+
         FactionsManager.getInstance().playerManager.setPlayerFaction(this.id, factionID);
     }
 
     
-    public void addInvite(UUID faction) {
+    public Boolean hasInvite(UUID faction) {
+        return FactionsManager.getInstance().inviteManager.playerHasInvite(this.id, faction);
+    }
 
+
+    public void addInvite(UUID faction) {
+        FactionsManager.getInstance().inviteManager.createFactionInvite(this.id, faction);
     }
     
     public void removeInvite(UUID faction) {
+        FactionsManager.getInstance().inviteManager.deletePlayerInvite(this.id, faction);
+    }
+    
 
+    public void removeAllInvites() {
+        FactionsManager.getInstance().inviteManager.deleteAllPlayerInvites(this.id);
     }
     
 }

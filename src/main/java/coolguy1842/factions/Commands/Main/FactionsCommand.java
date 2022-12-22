@@ -9,12 +9,15 @@ import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionAcceptCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionCreateCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionBalanceCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionDisbandCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionInfoCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionInviteCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionLeaveCommand;
-import coolguy1842.factions.SubCommands.Factions.WithFaction.FactionRenameCommand;
+import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionDenyCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionBalanceCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionDisbandCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInviteCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionKickCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionRenameCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionTransferCommand;
 
 public class FactionsCommand implements CommandExecutor {
     @Override
@@ -34,14 +37,23 @@ public class FactionsCommand implements CommandExecutor {
             }
 
             switch(args[0]) {
+            case "info":
+                FactionInfoCommand.execute(p, player, args);
+                break;
             case "create":
                 FactionCreateCommand.execute(p, player, args);
                 break;
             case "leave":
                 FactionLeaveCommand.execute(p, player, args);
                 break;
+            case "kick":
+                FactionKickCommand.execute(p, player, args);
+                break;
             case "disband":
                 FactionDisbandCommand.execute(p, player, args);
+                break;
+            case "transfer":
+                FactionTransferCommand.execute(p, player, args);
                 break;
             case "invite":
                 FactionInviteCommand.execute(p, player, args);
@@ -49,6 +61,9 @@ public class FactionsCommand implements CommandExecutor {
             case "accept":
                 FactionAcceptCommand.execute(p, player, args);
                 break;    
+            case "deny":
+                FactionDenyCommand.execute(p, player, args);
+                break;   
             case "rename":
                 FactionRenameCommand.execute(p, player, args);
                 break;
