@@ -16,10 +16,10 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionRank.
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionRank.SetFactionRankIsDefault;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionRank.SetFactionRankPermissions;
 
-public class FactionsRankManager {
+public class RankManager {
     public HashMap<UUID, FactionRank> ranks;
 
-    public FactionsRankManager() {
+    public RankManager() {
         ranks = new HashMap<>();
     }
 

@@ -18,6 +18,7 @@ import coolguy1842.factions.SubCommands.Factions.InFaction.FactionKickCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionRenameCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionTransferCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionVaultCommand;
 
 public class FactionsCommand implements CommandExecutor {
     @Override
@@ -57,6 +58,9 @@ public class FactionsCommand implements CommandExecutor {
                 break;
             case "invite":
                 FactionInviteCommand.execute(p, player, args);
+                break;
+            case "vault":
+                FactionVaultCommand.execute(p, player, args);
                 break;
             case "accept":
                 FactionAcceptCommand.execute(p, player, args);

@@ -2,18 +2,20 @@ package coolguy1842.factions.Managers;
 
 import coolguy1842.factions.Classes.Database;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Loaders.LoadDatabase;
-import coolguy1842.factions.Managers.FactionsManagers.FactionsFactionManager;
-import coolguy1842.factions.Managers.FactionsManagers.FactionsInviteManager;
-import coolguy1842.factions.Managers.FactionsManagers.FactionsPlayerManager;
-import coolguy1842.factions.Managers.FactionsManagers.FactionsRankManager;
+import coolguy1842.factions.Managers.FactionsManagers.FactionManager;
+import coolguy1842.factions.Managers.FactionsManagers.InviteManager;
+import coolguy1842.factions.Managers.FactionsManagers.PlayerManager;
+import coolguy1842.factions.Managers.FactionsManagers.RankManager;
+import coolguy1842.factions.Managers.FactionsManagers.VaultManager;
 
 public class FactionsManager {
 
     
-    public FactionsFactionManager factionManager;
-    public FactionsRankManager rankManager;
-    public FactionsPlayerManager playerManager;
-    public FactionsInviteManager inviteManager;
+    public FactionManager factionManager;
+    public RankManager rankManager;
+    public VaultManager vaultManager;
+    public PlayerManager playerManager;
+    public InviteManager inviteManager;
     public Database database;
 
     private static FactionsManager instance = null;
@@ -23,13 +25,15 @@ public class FactionsManager {
 
         loadDatabase();
 
-        factionManager = new FactionsFactionManager();
-        rankManager = new FactionsRankManager();
-        playerManager = new FactionsPlayerManager();
-        inviteManager = new FactionsInviteManager();
+        factionManager = new FactionManager();
+        rankManager = new RankManager();
+        vaultManager = new VaultManager();
+        playerManager = new PlayerManager();
+        inviteManager = new InviteManager();
 
         factionManager.loadFactions();
         rankManager.loadRanks();
+        vaultManager.loadVaults();
         playerManager.loadPlayers();
         inviteManager.loadInvites();
     }
@@ -44,19 +48,21 @@ public class FactionsManager {
     }
     
     public void close() {
+        inviteManager.close();
+        playerManager.close();
+        vaultManager.close();
+        rankManager.close();
+        factionManager.close();
+
         database.disconnect();
 
-        factionManager.close();
-        rankManager.close();
-        playerManager.close();
-        inviteManager.close();
-
-        database = null;
-
-        factionManager = null;
-        rankManager = null;
-        playerManager = null;
         inviteManager = null;
+        playerManager = null;
+        rankManager = null;
+        factionManager = null;
+        vaultManager = null;
+        
+        database = null;
 
         instance = null;
     }

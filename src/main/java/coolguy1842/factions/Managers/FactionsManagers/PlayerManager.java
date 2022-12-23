@@ -15,10 +15,10 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionPlaye
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionPlayer.SetFactionPlayerMoney;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionPlayer.SetFactionPlayerRank;
 
-public class FactionsPlayerManager {
+public class PlayerManager {
     public HashMap<UUID, FactionPlayer> players;
 
-    public FactionsPlayerManager() {
+    public PlayerManager() {
         this.players = new HashMap<>();
     }
 

@@ -23,6 +23,8 @@ public class Faction {
 
     public HashMap<UUID, FactionPlayer> players;
     public HashMap<UUID, FactionRank> ranks;
+    public HashMap<UUID, FactionVault> vaults;
+    public HashMap<String, FactionVault> vaultsByName;
     public ArrayList<UUID> invites;
 
     public Faction(UUID id, String displayName, UUID leader, Long money) {
@@ -37,6 +39,8 @@ public class Faction {
         
         this.players = new HashMap<>();
         this.ranks = new HashMap<>();
+        this.vaults = new HashMap<>();
+        this.vaultsByName = new HashMap<>();
         this.invites = new ArrayList<>();
     }
 
@@ -51,6 +55,7 @@ public class Faction {
         return Component.text(this.displayName); 
     }
 
+    
     public void setMoney(Long money) {
         this.money = money;
         FactionsManager.getInstance().factionManager.setFactionMoney(this.id, money);
@@ -72,6 +77,12 @@ public class Faction {
         FactionsManager.getInstance().factionManager.factionsNameLookup.remove(this.displayName);
 
         this.displayName = displayName;
+
+        for(FactionVault vault : this.vaults.values()) {
+            vault.saveInventory();
+            vault.loadInventory();
+        }
+
         FactionsManager.getInstance().factionManager.factionsNameLookup.put(this.displayName, this.id);
         FactionsManager.getInstance().factionManager.setFactionDisplayName(this.id, displayName);
     }
@@ -90,6 +101,7 @@ public class Faction {
 
         return out;
     }
+
 
     public void setOption(String option, Object value) {
         if(this.options.containsKey(option)) return;
@@ -115,6 +127,15 @@ public class Faction {
     }
 
     
+    public Boolean hasVault(UUID vaultID) {
+        return this.vaults.containsKey(vaultID);
+    }
+    
+    public Boolean hasVault(String displayName) {
+        return this.vaultsByName.containsKey(displayName);
+    }
+    
+
     public Boolean hasInvite(UUID player) {
         return this.invites.contains(player);
     }
@@ -153,7 +174,6 @@ public class Faction {
         FactionsManager.getInstance().inviteManager.deletePlayerInvite(player, this.id);
     }
 
-    
     public void removeAllInvites() {
         for(UUID invite : this.invites) {
             FactionsManager.getInstance().inviteManager.deletePlayerInvite(invite, this.id);

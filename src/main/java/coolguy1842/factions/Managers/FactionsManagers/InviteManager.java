@@ -15,10 +15,10 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Getters.GetFactionPl
 import coolguy1842.factions.Managers.FactionsManagerMethods.Loaders.LoadFactionInvites;
 import oshi.util.tuples.Pair;
 
-public class FactionsInviteManager {
+public class InviteManager {
     public HashMap<UUID, ArrayList<UUID>> invites;
 
-    public FactionsInviteManager() {
+    public InviteManager() {
         invites = new HashMap<>();
     }
 

@@ -38,6 +38,15 @@ public class LoadDatabase {
         """);
 
         manager.database.execute("""
+            CREATE TABLE IF NOT EXISTS `factionVaults` (
+                `id` TEXT NOT NULL PRIMARY KEY,
+                `faction` TEXT NOT NULL,
+                `displayName` TEXT NOT NULL,
+                `contents` TEXT NOT NULL
+            );
+        """);
+
+        manager.database.execute("""
             CREATE TABLE IF NOT EXISTS `ranks` (
                 `id` TEXT NOT NULL PRIMARY KEY,
                 `faction` TEXT NOT NULL,

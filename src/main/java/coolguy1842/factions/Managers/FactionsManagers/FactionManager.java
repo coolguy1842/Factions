@@ -18,11 +18,11 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetF
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionMoney;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionOptions;
 
-public class FactionsFactionManager {
+public class FactionManager {
     public HashMap<UUID, Faction> factions;
     public HashMap<String, UUID> factionsNameLookup;
 
-    public FactionsFactionManager() {
+    public FactionManager() {
         factions = new HashMap<>();
         factionsNameLookup = new HashMap<>();
     }

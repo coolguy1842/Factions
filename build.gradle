@@ -48,6 +48,7 @@ repositories {
     maven { url = "https://repo.dmulloy2.net/repository/public/" }
     maven { url = "https://mvnrepository.com/artifact/commons-io/commons-io"} 
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core' }
     // mavenLocal() // This is needed for CraftBukkit and Spigot.
 
     // Use Maven Central for resolving dependencies.
@@ -68,6 +69,7 @@ dependencies {
     implementation 'org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT'
 
     implementation 'org.xerial:sqlite-jdbc:3.40.0.0'
+    implementation 'commons-codec:commons-codec:1.15'
 }
 
 application {

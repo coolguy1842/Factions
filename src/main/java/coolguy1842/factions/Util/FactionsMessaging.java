@@ -24,7 +24,7 @@ public class FactionsMessaging {
         for (Component component : components) {
             msg = msg.append(component);
         }
-        
+     
         Bukkit.getPlayer(id).sendMessage(msg);
     }
 

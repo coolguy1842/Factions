@@ -32,7 +32,8 @@ public class PlayerWithFactionTabCompleter {
             out.add("info");
             out.add("bal");
             out.add("balance");
-
+            out.add("vault");
+            
             break;
         case 2:
             if(args[0].equals("invite")) {
@@ -68,8 +69,33 @@ public class PlayerWithFactionTabCompleter {
 
                 break;
             }
-            
+            else if(args[0].equals("vault")) {
+                if(player.hasPermission("viewvault")) out.add("open");
+                if(player.hasPermission("createvault")) out.add("create");
+                if(player.hasPermission("renamevault")) out.add("rename");
+                if(player.hasPermission("removevault")) out.add("remove");
+            }
+
             break;
+        case 3:
+            if(args[0].equals("vault")) {
+                if(args[1].equals("open") && player.hasPermission("viewvault")) {
+                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                        out.add(displayName);
+                    }   
+                }
+                else if(args[1].equals("rename") && player.hasPermission("renamevault")) {
+                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                        out.add(displayName);
+                    }   
+                }
+                else if(args[1].equals("remove") && player.hasPermission("removevault")) {
+                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                        out.add(displayName);
+                    }   
+                }
+            }
+
         default: break;
         }
 
