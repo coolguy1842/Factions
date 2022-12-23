@@ -8,6 +8,6 @@ public class SetFactionRankIsDefault {
     public static void set(FactionsManager manager, UUID id, Boolean isDefault) {
         if(!manager.rankManager.hasRank(id)) return;
 
-        manager.database.execute("UPDATE ranks SET isDefault = ? WHERE id = ?", isDefault, id.toString());
+        manager.database.execute("UPDATE factionRanks SET isDefault = ? WHERE id = ?", isDefault, id.toString());
     }
 }

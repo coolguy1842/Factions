@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
+import coolguy1842.factions.Classes.FactionVault;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
@@ -27,6 +28,10 @@ public class FactionDisbandCommand {
         else if(!player.isLeader()) {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[DisbandCommandMessages.NOTLEADER.ordinal()]);
             return;
+        }
+
+        for(FactionVault vault : player.getFaction().vaults.values()) {
+            vault.dropAllContents(p.getLocation());
         }
 
         FactionsMessaging.broadcastMessage(Globals.factionsPrefix, player.getFaction().getFormattedDisplayName(), Component.text(" has been disbanded."));

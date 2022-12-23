@@ -28,6 +28,11 @@ public class PlayerWithFactionTabCompleter {
             if(player.hasPermission("kick")) out.add("kick");
             if(player.hasPermission("rename")) out.add("rename");
             
+            if(player.hasPermission("claim")) out.add("claim");
+            if(player.hasPermission("unclaim")) out.add("unclaim");
+            
+            if(player.hasPermission("claim")) out.add("autoclaim");
+
             out.add("help");
             out.add("info");
             out.add("bal");

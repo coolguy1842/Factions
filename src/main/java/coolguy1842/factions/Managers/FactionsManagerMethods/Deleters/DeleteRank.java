@@ -16,7 +16,7 @@ public class DeleteRank {
             player.setRank(null);
         }
         
-        manager.database.execute("DELETE FROM ranks WHERE id = ?", id.toString());
+        manager.database.execute("DELETE FROM factionRanks WHERE id = ?", id.toString());
 
         rank.getFaction().ranks.remove(id);
         manager.rankManager.ranks.remove(id);

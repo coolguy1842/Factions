@@ -10,7 +10,9 @@ import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionAcceptCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionCreateCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionDenyCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionAutoClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionBalanceCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionDisbandCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInviteCommand;
@@ -18,6 +20,7 @@ import coolguy1842.factions.SubCommands.Factions.InFaction.FactionKickCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionRenameCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionTransferCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionUnClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionVaultCommand;
 
 public class FactionsCommand implements CommandExecutor {
@@ -49,6 +52,15 @@ public class FactionsCommand implements CommandExecutor {
                 break;
             case "kick":
                 FactionKickCommand.execute(p, player, args);
+                break;
+            case "claim":
+                FactionClaimCommand.execute(p, player, args);
+                break;
+            case "autoclaim":
+                FactionAutoClaimCommand.execute(p, player, args);
+                break;
+            case "unclaim":
+                FactionUnClaimCommand.execute(p, player, args);
                 break;
             case "disband":
                 FactionDisbandCommand.execute(p, player, args);

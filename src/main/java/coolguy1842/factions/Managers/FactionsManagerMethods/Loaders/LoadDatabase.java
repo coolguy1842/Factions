@@ -23,6 +23,15 @@ public class LoadDatabase {
         """);
         
         manager.database.execute("""
+            CREATE TABLE IF NOT EXISTS `factionRanks` (
+                `id` TEXT NOT NULL PRIMARY KEY,
+                `faction` TEXT NOT NULL,
+                `default` INTEGER NOT NULL,
+                `permissions` text
+            );
+        """);
+        
+        manager.database.execute("""
             CREATE TABLE IF NOT EXISTS `factionOptions` (
                 `option` TEXT NOT NULL PRIMARY KEY,
                 `faction` TEXT NOT NULL,
@@ -47,11 +56,9 @@ public class LoadDatabase {
         """);
 
         manager.database.execute("""
-            CREATE TABLE IF NOT EXISTS `ranks` (
-                `id` TEXT NOT NULL PRIMARY KEY,
-                `faction` TEXT NOT NULL,
-                `default` INTEGER NOT NULL,
-                `permissions` text
+            CREATE TABLE IF NOT EXISTS `factionClaims` (
+                `chunk` TEXT NOT NULL PRIMARY KEY,
+                `faction` TEXT NOT NULL
             );
         """);
         

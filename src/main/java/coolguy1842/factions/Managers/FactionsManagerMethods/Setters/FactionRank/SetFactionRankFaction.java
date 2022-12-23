@@ -8,6 +8,6 @@ public class SetFactionRankFaction {
     public static void set(FactionsManager manager, UUID id, UUID factionID) {
         if(!manager.rankManager.hasRank(id)) return;
 
-        manager.database.execute("UPDATE ranks SET faction = ? WHERE id = ?", factionID.toString(), id.toString());
+        manager.database.execute("UPDATE factionRanks SET faction = ? WHERE id = ?", factionID.toString(), id.toString());
     }
 }

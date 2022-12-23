@@ -11,7 +11,7 @@ import coolguy1842.factions.Managers.FactionsManager;
 
 public class LoadFactionRanks {
     public static void load(FactionsManager manager) {
-        CachedRowSet rows = manager.database.query("SELECT id FROM ranks");
+        CachedRowSet rows = manager.database.query("SELECT id FROM factionRanks");
         if(rows == null) return;
         else if(rows.size() <= 0) return;
 
@@ -25,7 +25,7 @@ public class LoadFactionRanks {
     }
 
     public static FactionRank loadRank(FactionsManager manager, UUID id) {
-        CachedRowSet rows = manager.database.query("SELECT * FROM ranks WHERE id = ?", id.toString());
+        CachedRowSet rows = manager.database.query("SELECT * FROM factionRanks WHERE id = ?", id.toString());
         if(rows == null) return null;
         else if(rows.size() <= 0) return null;
 

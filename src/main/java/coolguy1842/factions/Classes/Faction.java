@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
@@ -26,6 +27,7 @@ public class Faction {
     public HashMap<UUID, FactionVault> vaults;
     public HashMap<String, FactionVault> vaultsByName;
     public ArrayList<UUID> invites;
+    public ArrayList<Chunk> claims;
 
     public Faction(UUID id, String displayName, UUID leader, Long money) {
         this.id = id;
@@ -42,6 +44,7 @@ public class Faction {
         this.vaults = new HashMap<>();
         this.vaultsByName = new HashMap<>();
         this.invites = new ArrayList<>();
+        this.claims = new ArrayList<>();
     }
 
     

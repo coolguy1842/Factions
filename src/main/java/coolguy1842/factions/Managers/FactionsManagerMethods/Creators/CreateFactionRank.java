@@ -10,7 +10,7 @@ public class CreateFactionRank {
     public static FactionRank create(FactionsManager manager, UUID id, Faction faction, String displayName, Boolean isDefault, String... permissions) {
         if(manager.rankManager.hasRank(id)) return manager.rankManager.getRank(id);
 
-        manager.database.execute("INSERT INTO ranks(id, faction, displayName, isDefault, permissions) VALUES(?, ?, ?, ?, ?)", 
+        manager.database.execute("INSERT INTO factionRanks(id, faction, displayName, isDefault, permissions) VALUES(?, ?, ?, ?, ?)", 
             id.toString(), faction.getID(), displayName, isDefault, String.join(",", permissions));
         
         return manager.rankManager.loadRank(id);
