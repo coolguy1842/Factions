@@ -12,6 +12,8 @@ import coolguy1842.factions.Commands.TPA.TPAHereCommand;
 import coolguy1842.factions.Commands.TPA.TPAcceptCommand;
 import coolguy1842.factions.Commands.TPA.TPDenyCommand;
 import coolguy1842.factions.Events.Entity.Inventory.InventoryInteract;
+import coolguy1842.factions.Events.Entity.Player.PlayerAttack;
+import coolguy1842.factions.Events.Entity.Player.PlayerInteract;
 import coolguy1842.factions.Events.Entity.Player.PlayerJoin;
 import coolguy1842.factions.Events.Entity.Player.PlayerLeave;
 import coolguy1842.factions.Events.Entity.Player.PlayerMove;
@@ -54,6 +56,8 @@ public final class Factions extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoin(), Globals.plugin);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), Globals.plugin);
         getServer().getPluginManager().registerEvents(new PlayerMove(), Globals.plugin);
+        getServer().getPluginManager().registerEvents(new PlayerInteract(), Globals.plugin);
+        getServer().getPluginManager().registerEvents(new PlayerAttack(), Globals.plugin);
 
         getServer().getPluginManager().registerEvents(new InventoryInteract(), Globals.plugin);
     }

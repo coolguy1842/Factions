@@ -1,9 +1,9 @@
 package coolguy1842.factions.Events.Entity.Player;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +16,7 @@ import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.title.Title;
-import oshi.util.tuples.Pair;
+import net.kyori.adventure.title.Title.Times;
 
 public class PlayerMove implements Listener {
     private static HashMap<Player, UUID> playerCurrentClaim = new HashMap<>();
@@ -29,12 +29,9 @@ public class PlayerMove implements Listener {
         Faction newChunkFaction = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());
 
         if(FactionsManager.getInstance().claimManager.playerHasAutoClaim(p) && newChunkFaction == null) {
-            Pair<Chunk, Faction> pair = FactionsManager.getInstance().claimManager.createClaim(
-                p.getChunk(), FactionsManager.getInstance().playerManager.getPlayer(p).getFaction().getID()
-            );
+            FactionsManager.getInstance().claimManager.createClaim(p.getChunk(), FactionsManager.getInstance().playerManager.getPlayer(p).getFaction().getID());
 
-            newChunkFaction = pair.getB();                
-
+            newChunkFaction = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());          
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, Component.text("Claimed chunk successfully."));
         } 
 
@@ -45,6 +42,6 @@ public class PlayerMove implements Listener {
         Component factionName = (newChunkFaction == null ? wilderness : newChunkFaction.getFormattedDisplayName());
         playerCurrentClaim.put(p, newFactionID);
 
-        p.showTitle(Title.title(Component.text("Now Entering"), factionName));
+        p.showTitle(Title.title(Component.text("Now Entering"), factionName, Times.times(Duration.ofMillis(500), Duration.ofMillis(750), Duration.ofMillis(500))));
     } 
 }

@@ -58,6 +58,14 @@ public class Faction {
         return Component.text(this.displayName); 
     }
 
+    public Boolean hasOnlinePlayer() {
+        for(FactionPlayer player : this.players.values()) {
+            if(player.getPlayer() != null) return true;
+        }
+
+        return false;
+    }
+
     
     public void setMoney(Long money) {
         this.money = money;
