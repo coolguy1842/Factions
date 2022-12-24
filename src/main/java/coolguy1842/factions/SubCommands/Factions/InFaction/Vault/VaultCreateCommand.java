@@ -1,4 +1,4 @@
-package coolguy1842.factions.SubCommands.Vault;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Vault;
 
 import java.util.UUID;
 

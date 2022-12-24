@@ -1,4 +1,4 @@
-package coolguy1842.factions.SubCommands.Factions.InFaction;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

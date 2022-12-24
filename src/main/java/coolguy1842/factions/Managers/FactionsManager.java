@@ -4,6 +4,7 @@ import coolguy1842.factions.Classes.Database;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Loaders.LoadDatabase;
 import coolguy1842.factions.Managers.FactionsManagers.ClaimManager;
 import coolguy1842.factions.Managers.FactionsManagers.FactionManager;
+import coolguy1842.factions.Managers.FactionsManagers.HomeManager;
 import coolguy1842.factions.Managers.FactionsManagers.InviteManager;
 import coolguy1842.factions.Managers.FactionsManagers.PlayerManager;
 import coolguy1842.factions.Managers.FactionsManagers.RankManager;
@@ -16,6 +17,7 @@ public class FactionsManager {
     public PlayerManager playerManager;
     public InviteManager inviteManager;
     public ClaimManager claimManager;
+    public HomeManager homeManager;
 
     public Database database;
 
@@ -32,6 +34,7 @@ public class FactionsManager {
         playerManager = new PlayerManager();
         inviteManager = new InviteManager();
         claimManager = new ClaimManager();
+        homeManager = new HomeManager();
 
         factionManager.loadFactions();
         rankManager.loadRanks();
@@ -39,6 +42,7 @@ public class FactionsManager {
         playerManager.loadPlayers();
         inviteManager.loadInvites();
         claimManager.loadClaims();
+        homeManager.loadHomes();
     }
 
     public static void createInstance() { 
@@ -51,6 +55,7 @@ public class FactionsManager {
     }
     
     public void close() {
+        homeManager.close();
         claimManager.close();
         inviteManager.close();
         playerManager.close();
@@ -58,8 +63,7 @@ public class FactionsManager {
         rankManager.close();
         factionManager.close();
 
-        database.disconnect();
-
+        homeManager = null;
         claimManager = null;
         inviteManager = null;
         playerManager = null;
@@ -67,6 +71,7 @@ public class FactionsManager {
         factionManager = null;
         vaultManager = null;
         
+        database.disconnect();
         database = null;
 
         instance = null;

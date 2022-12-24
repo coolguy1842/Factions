@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import coolguy1842.factions.Classes.Faction;
+import coolguy1842.factions.Classes.FactionHome;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Classes.FactionRank;
 import coolguy1842.factions.Classes.FactionVault;
@@ -22,6 +23,11 @@ public class DeleteFaction {
         for(FactionVault vault : faction.vaults.values().stream().toList()) {
             manager.vaultManager.deleteVault(vault.getID());
         }
+        
+        for(FactionHome home : faction.homes.values().stream().toList()) {
+            manager.homeManager.deleteHome(home.getID());
+        }
+        
 
         List<FactionPlayer> players = faction.players.values().stream().toList();
         for(FactionPlayer player : players) {
@@ -34,6 +40,7 @@ public class DeleteFaction {
         manager.database.execute("DELETE FROM factionOptions WHERE faction = ?", id.toString());
         manager.database.execute("DELETE FROM factionInvites WHERE faction = ?", id.toString());
         manager.database.execute("DELETE FROM factionVaults WHERE faction = ?", id.toString());
+        manager.database.execute("DELETE FROM factionHomes WHERE faction = ?", id.toString());
         
         manager.factionManager.factionsNameLookup.remove(faction.getDisplayName());
         manager.factionManager.factions.remove(id);

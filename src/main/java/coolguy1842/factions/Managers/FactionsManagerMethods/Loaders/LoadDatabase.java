@@ -14,6 +14,15 @@ public class LoadDatabase {
 
     private static void loadTables(FactionsManager manager) {
         manager.database.execute("""
+            CREATE TABLE IF NOT EXISTS `players` (
+                `id` TEXT NOT NULL PRIMARY KEY,
+                `faction` TEXT,
+                `rank` TEXT,
+                `money` INTEGER NOT NULL
+            );
+        """);
+
+        manager.database.execute("""
             CREATE TABLE IF NOT EXISTS `factions` (
                 `id` TEXT NOT NULL PRIMARY KEY,
                 `displayName` TEXT NOT NULL,
@@ -61,14 +70,14 @@ public class LoadDatabase {
                 `faction` TEXT NOT NULL
             );
         """);
-        
+     
         manager.database.execute("""
-            CREATE TABLE IF NOT EXISTS `players` (
+            CREATE TABLE IF NOT EXISTS `factionHomes` (
                 `id` TEXT NOT NULL PRIMARY KEY,
-                `faction` TEXT,
-                `rank` TEXT,
-                `money` INTEGER NOT NULL
-            );
+                `displayName` TEXT NOT NULL,
+                `location` TEXT NOT NULL,
+                `faction` TEXT NOT NULL
+            );            
         """);
     }
 }

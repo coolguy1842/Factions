@@ -9,6 +9,7 @@ import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
+import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 
 public class Faction {
@@ -24,11 +25,17 @@ public class Faction {
 
     public HashMap<UUID, FactionPlayer> players;
     public HashMap<UUID, FactionRank> ranks;
+    
     public HashMap<UUID, FactionVault> vaults;
     public HashMap<String, FactionVault> vaultsByName;
+    
+    public HashMap<UUID, FactionHome> homes;
+    public HashMap<String, FactionHome> homesByName;
+
     public ArrayList<UUID> invites;
     public ArrayList<Chunk> claims;
 
+    
     public Faction(UUID id, String displayName, UUID leader, Long money) {
         this.id = id;
         
@@ -41,8 +48,13 @@ public class Faction {
         
         this.players = new HashMap<>();
         this.ranks = new HashMap<>();
+        
         this.vaults = new HashMap<>();
         this.vaultsByName = new HashMap<>();
+        
+        this.homes = new HashMap<>();
+        this.homesByName = new HashMap<>();
+        
         this.invites = new ArrayList<>();
         this.claims = new ArrayList<>();
     }
@@ -99,6 +111,28 @@ public class Faction {
     }
 
 
+    public FactionVault getVault(String displayName) { 
+        if(!this.hasVault(displayName)) return null;
+        return this.vaultsByName.get(displayName);
+    }
+    
+    public FactionVault getVault(UUID id) { 
+        if(!this.hasVault(id)) return null;
+        return this.vaults.get(id);
+    }
+
+    
+    public FactionHome getHome(String displayName) { 
+        if(!this.hasHome(displayName)) return null;
+        return this.homesByName.get(displayName);
+    }
+    
+    public FactionHome getHome(UUID id) { 
+        if(!this.hasHome(id)) return null;
+        return this.homes.get(id);
+    }
+
+
     public Object getOption(String option) {
         return this.options.get(option);
     }
@@ -146,6 +180,15 @@ public class Faction {
         return this.vaultsByName.containsKey(displayName);
     }
     
+    
+    public Boolean hasHome(UUID vaultID) {
+        return this.homes.containsKey(vaultID);
+    }
+    
+    public Boolean hasHome(String displayName) {
+        return this.homesByName.containsKey(displayName);
+    }
+    
 
     public Boolean hasInvite(UUID player) {
         return this.invites.contains(player);
@@ -191,5 +234,18 @@ public class Faction {
         }
 
         this.invites.clear();
+    }
+
+
+    public void broadcastMessage(Component... components) {
+        Component message = Component.empty();
+
+        for(Component component : components) {
+            message = message.append(component);
+        }
+
+        for(FactionPlayer factionPlayer : this.players.values()) {
+            FactionsMessaging.sendMessage(factionPlayer.getID(), message);
+        }
     }
 }

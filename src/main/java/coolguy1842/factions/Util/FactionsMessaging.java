@@ -9,6 +9,8 @@ import net.kyori.adventure.text.Component;
 
 public class FactionsMessaging {
     public static void sendMessage(Player player, Component... components) {
+        if(player == null) return;
+
         Component msg = Component.empty();
         for (Component component : components) {
             msg = msg.append(component);

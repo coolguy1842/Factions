@@ -1,13 +1,9 @@
-package coolguy1842.factions.SubCommands.Factions.InFaction;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Vault;
 
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
-import coolguy1842.factions.SubCommands.Vault.VaultCreateCommand;
-import coolguy1842.factions.SubCommands.Vault.VaultOpenCommand;
-import coolguy1842.factions.SubCommands.Vault.VaultRemoveCommand;
-import coolguy1842.factions.SubCommands.Vault.VaultRenameCommand;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 

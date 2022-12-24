@@ -10,18 +10,21 @@ import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionAcceptCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionCreateCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionDenyCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionAutoClaimCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionBalanceCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionClaimCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionDisbandCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInviteCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionKickCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionRenameCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionTransferCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionUnClaimCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.FactionVaultCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionAutoClaimCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionClaimCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionUnClaimCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionDeleteHomeCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionHomeCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionSetHomeCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Info.FactionBalanceCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Info.FactionInfoCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionDisbandCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionInviteCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionKickCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionRenameCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionTransferCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Vault.FactionVaultCommand;
 
 public class FactionsCommand implements CommandExecutor {
     @Override
@@ -40,6 +43,7 @@ public class FactionsCommand implements CommandExecutor {
                 return false;
             }
 
+            // massive list (dont know any real alternatives)
             switch(args[0]) {
             case "info":
                 FactionInfoCommand.execute(p, player, args);
@@ -85,6 +89,15 @@ public class FactionsCommand implements CommandExecutor {
                 break;
             case "bal": case "balance":
                 FactionBalanceCommand.execute(p, player, args);
+                break;
+            case "home":
+                FactionHomeCommand.execute(p, player, args);
+                break;
+            case "sethome":
+                FactionSetHomeCommand.execute(p, player, args);
+                break;
+            case "delhome": case "deletehome":
+                FactionDeleteHomeCommand.execute(p, player, args);
                 break;
             default:
                 break;

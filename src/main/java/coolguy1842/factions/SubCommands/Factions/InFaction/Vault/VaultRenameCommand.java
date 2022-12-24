@@ -1,11 +1,9 @@
-package coolguy1842.factions.SubCommands.Vault;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Vault;
 
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
-import coolguy1842.factions.Classes.FactionVault;
-import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 
@@ -50,9 +48,7 @@ public class VaultRenameCommand {
             return;
         }
 
-        FactionVault vault = FactionsManager.getInstance().vaultManager.getVault(args[2]);
-        vault.setDisplayName(args[3]);
-
+        player.getFaction().getVault(args[2]).setDisplayName(args[3]);
         
         for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
             Player fPlayer = factionPlayer.getPlayer();

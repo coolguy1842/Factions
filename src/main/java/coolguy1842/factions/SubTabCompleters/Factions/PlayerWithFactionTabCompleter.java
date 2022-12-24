@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
+import coolguy1842.factions.Classes.FactionHome;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 
@@ -26,18 +27,32 @@ public class PlayerWithFactionTabCompleter {
 
             if(player.hasPermission("invite")) out.add("invite");
             if(player.hasPermission("kick")) out.add("kick");
+
             if(player.hasPermission("rename")) out.add("rename");
             
-            if(player.hasPermission("claim")) out.add("claim");
+
+            if(player.hasPermission("claim")) {
+                out.add("claim");
+                out.add("autoclaim");
+            }
+            
             if(player.hasPermission("unclaim")) out.add("unclaim");
             
-            if(player.hasPermission("claim")) out.add("autoclaim");
 
             out.add("help");
             out.add("info");
+            
             out.add("bal");
             out.add("balance");
-            out.add("vault");
+
+            if(player.hasPermission("viewvault") ||  player.hasPermission("createvault") || 
+                player.hasPermission("renamevault") || player.hasPermission("removevault")) {    
+                out.add("vault");
+            }
+
+            out.add("home");
+            if(player.hasPermission("sethome")) out.add("sethome");
+            if(player.hasPermission("delhome")) out.add("delhome");
             
             break;
         case 2:
@@ -79,6 +94,25 @@ public class PlayerWithFactionTabCompleter {
                 if(player.hasPermission("createvault")) out.add("create");
                 if(player.hasPermission("renamevault")) out.add("rename");
                 if(player.hasPermission("removevault")) out.add("remove");
+            }
+            else if(args[0].equals("home")) {
+                for(FactionHome home : player.getFaction().homes.values()) {
+                    out.add(home.getDisplayName());
+                }
+            }
+            else if(args[0].equals("sethome")) {
+                if(!player.hasPermission("sethome")) break;
+
+                for(FactionHome home : player.getFaction().homes.values()) {
+                    out.add(home.getDisplayName());
+                }
+            }
+            else if(args[0].equals("delhome")) {
+                if(!player.hasPermission("delhome")) break;
+
+                for(FactionHome home : player.getFaction().homes.values()) {
+                    out.add(home.getDisplayName());
+                }
             }
 
             break;

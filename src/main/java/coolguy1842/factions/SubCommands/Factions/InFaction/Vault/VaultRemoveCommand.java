@@ -1,4 +1,4 @@
-package coolguy1842.factions.SubCommands.Vault;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Vault;
 
 import org.bukkit.entity.Player;
 
@@ -38,10 +38,10 @@ public class VaultRemoveCommand {
             return;
         }
 
-        FactionVault vault = FactionsManager.getInstance().vaultManager.getVault(args[2]);
+        FactionVault vault = player.getFaction().getVault(args[2]);
         vault.dropAllContents(p.getLocation());
 
-        FactionsManager.getInstance().vaultManager.deleteVault(args[2]);
+        FactionsManager.getInstance().vaultManager.deleteVault(vault.getID());
 
         
         for(FactionPlayer factionPlayer : player.getFaction().players.values()) {

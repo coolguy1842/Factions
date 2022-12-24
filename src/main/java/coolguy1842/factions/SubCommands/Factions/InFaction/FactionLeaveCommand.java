@@ -16,7 +16,7 @@ enum LeaveCommandMessages {
 public class FactionLeaveCommand {
     private static Component[] commandMessages = {
         Component.text("You are not in a faction."),
-        Component.text("You are the leader; you can disband or transfer ownership instead."),
+        Component.text("You are the leader, you can disband or transfer ownership instead."),
         Component.text("Left the faction."),
     }; 
     
