@@ -21,7 +21,7 @@ public class VaultOpenCommand {
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
-        if(!player.hasPermission("viewvault")) {
+        if(!player.hasPermission("openvault")) {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultOpenCommandMessages.NOPERMISSIONS.ordinal()]);
             return;
         }
@@ -33,7 +33,6 @@ public class VaultOpenCommand {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultOpenCommandMessages.NOTEXISTS.ordinal()]);
             return;
         }
-
 
         p.openInventory(player.getFaction().getVault(args[2]).getInventory());
     }

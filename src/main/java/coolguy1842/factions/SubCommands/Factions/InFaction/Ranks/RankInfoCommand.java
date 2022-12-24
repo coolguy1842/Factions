@@ -23,7 +23,7 @@ public class RankInfoCommand {
             return;
         }
 
-        String permissionsStr = String.join(", ", player.getRank().getPermissions());
+        String permissionsStr = player.getRank().getPrettyPermissionsString();
         if(permissionsStr.length() <= 0) permissionsStr = "None";
  
         Component message = Component.text("----- Rank \"" + player.getRank().getDisplayName() + "\" Info -----\n")

@@ -9,12 +9,14 @@ import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Classes.FactionHome;
 import coolguy1842.factions.Classes.FactionPlayer;
-import coolguy1842.factions.Classes.FactionRank;
 import coolguy1842.factions.Managers.FactionsManager;
+import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.RankTabCompleter;
 
 public class PlayerWithFactionTabCompleter {
     public static List<String> onTabComplete(Player p, FactionPlayer player, Command command, String label, String[] args) {
         ArrayList<String> out = new ArrayList<>();
+
+        if(args.length > 1 && args[0].equals("rank")) return RankTabCompleter.onRankTabComplete(p, player, command, label, args);
 
         switch(args.length) {
         case 1:
@@ -36,7 +38,6 @@ public class PlayerWithFactionTabCompleter {
                 out.add("claim");
                 out.add("autoclaim");
             }
-            
             if(player.hasPermission("unclaim")) out.add("unclaim");
             
 
@@ -48,7 +49,7 @@ public class PlayerWithFactionTabCompleter {
 
             out.add("rank");
 
-            if(player.hasPermission("viewvault") ||  player.hasPermission("createvault") || 
+            if(player.hasPermission("openvault") ||  player.hasPermission("createvault") || 
                 player.hasPermission("renamevault") || player.hasPermission("removevault")) {    
                 out.add("vault");
             }
@@ -92,7 +93,7 @@ public class PlayerWithFactionTabCompleter {
 
                 break;
             case "vault":
-                if(player.hasPermission("viewvault")) out.add("open");
+                if(player.hasPermission("openvault")) out.add("open");
                 if(player.hasPermission("createvault")) out.add("create");
                 if(player.hasPermission("renamevault")) out.add("rename");
                 if(player.hasPermission("removevault")) out.add("remove");
@@ -120,18 +121,6 @@ public class PlayerWithFactionTabCompleter {
                 }    
                 
                 break;
-            case "rank":
-                out.add("info");
-                if(!player.isLeader()) break;
-
-                out.add("create");
-                out.add("rename");
-                out.add("remove");
-                out.add("set");
-                out.add("assign");
-                out.add("unassign");
-
-                break;
             default: break;
             }    
 
@@ -141,7 +130,7 @@ public class PlayerWithFactionTabCompleter {
             case "vault":
                 switch(args[1]) {
                     case "open":
-                        if(!player.hasPermission("viewvault")) break;
+                        if(!player.hasPermission("openvault")) break;
                         
                         for(String displayName : player.getFaction().vaultsByName.keySet()) {
                             out.add(displayName);
@@ -166,57 +155,9 @@ public class PlayerWithFactionTabCompleter {
                         break;
                     default: break;
                 }
-
-                break;
-            case "rank":
-                if(!player.isLeader()) break;
-                
-                switch(args[1]) {
-                case "set":
-                    out.add("setpermission");
-                    out.add("default");
-                    break;
-                case "assign":
-                    for(FactionRank rank : player.getFaction().ranks.values()) {
-                        out.add(rank.getDisplayName());
-                    }
-                    break;
-                case "unassign":
-                    for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
-                        if(!factionPlayer.hasRank()) continue;
-
-                        out.add(factionPlayer.getDisplayNameStr());
-                    }
-                    break;
-                default: break;
-                }
-            default: break;
-            }
-        case 4:
-            switch(args[0]) {
-            case "rank":
-                if(!player.isLeader()) break;
-
-                switch(args[1]) {
-                case "assign":
-                    if(!player.getFaction().hasRank(args[2])) break;
-
-                    for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
-                        if(factionPlayer.hasRank()) {
-                            if(factionPlayer.getRank().getDisplayName().equals(args[2])) continue;
-                        }
-
-                        out.add(factionPlayer.getDisplayNameStr());
-                    }    
-
-                    break;
-                default: break;
-                }
                 break;
             default: break;
             }
-
-            break;
         default: break;
         }
 

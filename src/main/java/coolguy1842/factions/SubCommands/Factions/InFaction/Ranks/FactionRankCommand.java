@@ -38,6 +38,9 @@ public class FactionRankCommand {
         case "set":
             RankSetCommand.execute(p, player, args);
             break;
+        case "get":
+            RankGetCommand.execute(p, player, args);
+            break;
         case "create":
             RankCreateCommand.execute(p, player, args);
             break;
@@ -46,6 +49,15 @@ public class FactionRankCommand {
             break;
         case "unassign":
             RankUnAssignCommand.execute(p, player, args);
+            break;
+        case "remove":
+            RankRemoveCommand.execute(p, player, args);
+            break;
+        case "rename":
+            RankRenameCommand.execute(p, player, args);
+            break;
+        case "list":
+            RankListCommand.execute(p, player, args);
             break;
         default:    
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RankCommandMessages.WRONGARG.ordinal()]);

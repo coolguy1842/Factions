@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
+import coolguy1842.factions.Util.StringUtil;
 
 public class FactionRank {
     private UUID id;
@@ -38,7 +39,8 @@ public class FactionRank {
     public String getDisplayName() { return this.displayName; }
     public Boolean getIsDefault() { return this.isDefault; }
     
-    private String getPermissionsString() { return String.join(",", permissions);  }
+    private String getPermissionsString() { return String.join(",", this.permissions); }
+    public String getPrettyPermissionsString() { return StringUtil.join(", ", this.permissions); }
     public ArrayList<String> getPermissions() { return this.permissions; }
 
 
@@ -57,7 +59,11 @@ public class FactionRank {
     } 
 
     public void setDisplayName(String displayName) {
+        this.faction.ranksByName.remove(this.displayName);
+
         this.displayName = displayName;
+        
+        this.faction.ranksByName.put(this.displayName, this);
         FactionsManager.getInstance().rankManager.setRankDisplayName(this.id, displayName);
     } 
 
@@ -70,14 +76,14 @@ public class FactionRank {
     public Boolean hasPermission(String permission) { return this.permissions.contains(permission); }
 
     public void addPermission(String permission) {
-        if(this.permissions.contains(permission)) return;
+        if(this.permissions.contains(permission) || permission.length() <= 0) return;
         this.permissions.add(permission);
 
         FactionsManager.getInstance().rankManager.setRankPermissions(this.id, this.getPermissionsString());
     }
     
     public void removePermission(String permission) {
-        if(!this.permissions.contains(permission)) return;
+        if(!this.permissions.contains(permission) || permission.length() <= 0) return;
         this.permissions.remove(permission);
 
         FactionsManager.getInstance().rankManager.setRankPermissions(this.id, this.getPermissionsString());
