@@ -39,7 +39,6 @@ public class LoadFactionVaults {
 
             FactionVault vault = new FactionVault(id, faction, displayName, contents);
             manager.vaultManager.vaults.put(id, vault);
-            manager.vaultManager.vaultsNameLookup.put(displayName, id);
 
             faction.vaults.put(id, vault);
             faction.vaultsByName.put(displayName, vault);

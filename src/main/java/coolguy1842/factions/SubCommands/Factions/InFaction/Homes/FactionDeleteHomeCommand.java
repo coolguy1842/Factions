@@ -22,7 +22,7 @@ public class FactionDeleteHomeCommand {
         Component.text("You do not have the permissions to delete homes."),
         Component.text("You must specify a home."),
         Component.text("That home does not exist."),
-        Component.text(" deleted the home called "),
+        Component.text(" deleted the home \""),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -44,6 +44,6 @@ public class FactionDeleteHomeCommand {
         }
 
         FactionsManager.getInstance().homeManager.deleteHome(player.getFaction().getHome(args[1]).getID());
-        player.getFaction().broadcastMessage( Globals.factionsPrefix, p.displayName(), commandMessages[DeleteHomeCommandMessages.SUCCESS.ordinal()], Component.text(args[1]));
+        player.getFaction().broadcastMessage( Globals.factionsPrefix, p.displayName(), commandMessages[DeleteHomeCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
     }
 }

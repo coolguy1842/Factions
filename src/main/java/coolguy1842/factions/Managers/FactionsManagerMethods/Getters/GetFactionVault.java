@@ -2,6 +2,7 @@ package coolguy1842.factions.Managers.FactionsManagerMethods.Getters;
 
 import java.util.UUID;
 
+import coolguy1842.factions.Classes.Faction;
 import coolguy1842.factions.Classes.FactionVault;
 import coolguy1842.factions.Managers.FactionsManager;
 
@@ -11,8 +12,8 @@ public class GetFactionVault {
         return null;
     }
 
-    public static FactionVault get(FactionsManager manager, String displayName) {
-        if(manager.vaultManager.hasVault(displayName)) return manager.vaultManager.vaults.get(manager.vaultManager.vaultsNameLookup.get(displayName));
+    public static FactionVault get(FactionsManager manager, String displayName, Faction faction) {
+        if(faction.hasVault(displayName)) return faction.getVault(displayName);
         return null;
     }
 }

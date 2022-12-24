@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Classes.FactionHome;
 import coolguy1842.factions.Classes.FactionPlayer;
+import coolguy1842.factions.Classes.FactionRank;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class PlayerWithFactionTabCompleter {
@@ -29,7 +30,7 @@ public class PlayerWithFactionTabCompleter {
             if(player.hasPermission("kick")) out.add("kick");
 
             if(player.hasPermission("rename")) out.add("rename");
-            
+    
 
             if(player.hasPermission("claim")) {
                 out.add("claim");
@@ -45,6 +46,8 @@ public class PlayerWithFactionTabCompleter {
             out.add("bal");
             out.add("balance");
 
+            out.add("rank");
+
             if(player.hasPermission("viewvault") ||  player.hasPermission("createvault") || 
                 player.hasPermission("renamevault") || player.hasPermission("removevault")) {    
                 out.add("vault");
@@ -56,7 +59,9 @@ public class PlayerWithFactionTabCompleter {
             
             break;
         case 2:
-            if(args[0].equals("invite")) {
+            
+            switch(args[0]) {
+            case "invite":
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                     if(FactionsManager.getInstance().playerManager.getPlayer(onlinePlayer).inFaction()) continue;
                     if(FactionsManager.getInstance().inviteManager.playerHasInvite(onlinePlayer, player.getFaction().getID())) continue;
@@ -65,8 +70,7 @@ public class PlayerWithFactionTabCompleter {
                 }
 
                 break;
-            }
-            else if(args[0].equals("transfer")) {
+            case "transfer":
                 if(!player.isLeader()) break;
 
                 for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
@@ -76,8 +80,7 @@ public class PlayerWithFactionTabCompleter {
                 }
 
                 break;
-            }
-            else if(args[0].equals("kick")) {
+            case "kick":
                 if(!player.hasPermission("kick")) break;
 
                 for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
@@ -88,53 +91,132 @@ public class PlayerWithFactionTabCompleter {
                 }
 
                 break;
-            }
-            else if(args[0].equals("vault")) {
+            case "vault":
                 if(player.hasPermission("viewvault")) out.add("open");
                 if(player.hasPermission("createvault")) out.add("create");
                 if(player.hasPermission("renamevault")) out.add("rename");
                 if(player.hasPermission("removevault")) out.add("remove");
-            }
-            else if(args[0].equals("home")) {
+
+                break;
+            case "home":
                 for(FactionHome home : player.getFaction().homes.values()) {
                     out.add(home.getDisplayName());
                 }
-            }
-            else if(args[0].equals("sethome")) {
+                
+                break;
+            case "sethome":
                 if(!player.hasPermission("sethome")) break;
 
                 for(FactionHome home : player.getFaction().homes.values()) {
                     out.add(home.getDisplayName());
                 }
-            }
-            else if(args[0].equals("delhome")) {
+             
+                break;
+            case "delhome":
                 if(!player.hasPermission("delhome")) break;
 
                 for(FactionHome home : player.getFaction().homes.values()) {
                     out.add(home.getDisplayName());
-                }
-            }
+                }    
+                
+                break;
+            case "rank":
+                out.add("info");
+                if(!player.isLeader()) break;
+
+                out.add("create");
+                out.add("rename");
+                out.add("remove");
+                out.add("set");
+                out.add("assign");
+                out.add("unassign");
+
+                break;
+            default: break;
+            }    
 
             break;
         case 3:
-            if(args[0].equals("vault")) {
-                if(args[1].equals("open") && player.hasPermission("viewvault")) {
-                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
-                        out.add(displayName);
-                    }   
+            switch(args[0]) {
+            case "vault":
+                switch(args[1]) {
+                    case "open":
+                        if(!player.hasPermission("viewvault")) break;
+                        
+                        for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                            out.add(displayName);
+                        }   
+
+                        break;
+                    case "rename":
+                        if(!player.hasPermission("renamevault")) break;
+                        
+                        for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                            out.add(displayName);
+                        }   
+
+                        break;
+                    case "remove":
+                        if(!player.hasPermission("removevault")) break;
+                        
+                        for(String displayName : player.getFaction().vaultsByName.keySet()) {
+                            out.add(displayName);
+                        }   
+
+                        break;
+                    default: break;
                 }
-                else if(args[1].equals("rename") && player.hasPermission("renamevault")) {
-                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
-                        out.add(displayName);
-                    }   
+
+                break;
+            case "rank":
+                if(!player.isLeader()) break;
+                
+                switch(args[1]) {
+                case "set":
+                    out.add("setpermission");
+                    out.add("default");
+                    break;
+                case "assign":
+                    for(FactionRank rank : player.getFaction().ranks.values()) {
+                        out.add(rank.getDisplayName());
+                    }
+                    break;
+                case "unassign":
+                    for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
+                        if(!factionPlayer.hasRank()) continue;
+
+                        out.add(factionPlayer.getDisplayNameStr());
+                    }
+                    break;
+                default: break;
                 }
-                else if(args[1].equals("remove") && player.hasPermission("removevault")) {
-                    for(String displayName : player.getFaction().vaultsByName.keySet()) {
-                        out.add(displayName);
-                    }   
+            default: break;
+            }
+        case 4:
+            switch(args[0]) {
+            case "rank":
+                if(!player.isLeader()) break;
+
+                switch(args[1]) {
+                case "assign":
+                    if(!player.getFaction().hasRank(args[2])) break;
+
+                    for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
+                        if(factionPlayer.hasRank()) {
+                            if(factionPlayer.getRank().getDisplayName().equals(args[2])) continue;
+                        }
+
+                        out.add(factionPlayer.getDisplayNameStr());
+                    }    
+
+                    break;
+                default: break;
                 }
+                break;
+            default: break;
             }
 
+            break;
         default: break;
         }
 

@@ -6,6 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
+import coolguy1842.factions.Util.PlayerUtil;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 
 public class FactionPlayer {
     private UUID id;
@@ -24,6 +27,9 @@ public class FactionPlayer {
     }
 
     public UUID getID() { return this.id; }
+
+    public Component getDisplayName() { return PlayerUtil.getPlayerDisplayName(this.id); }
+    public String getDisplayNameStr() { return ((TextComponent)PlayerUtil.getPlayerDisplayName(this.id)).content(); }
     
     public Faction getFaction() { return this.faction; }
     public FactionRank getRank() { return this.rank; }
@@ -57,7 +63,6 @@ public class FactionPlayer {
         FactionsManager.getInstance().playerManager.setPlayerMoney(this.id, money);
     }
 
-
     public void setRank(UUID rankID) { 
         if(this.hasRank()) this.rank.players.remove(this.id);
 
@@ -66,7 +71,6 @@ public class FactionPlayer {
 
         FactionsManager.getInstance().playerManager.setPlayerRank(this.id, rankID);
     }
-
     
     public void setFaction(UUID factionID) { 
         if(this.inFaction()) this.faction.players.remove(this.id);

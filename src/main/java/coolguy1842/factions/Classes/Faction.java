@@ -24,7 +24,9 @@ public class Faction {
     private HashMap<String, Object> options;
 
     public HashMap<UUID, FactionPlayer> players;
+
     public HashMap<UUID, FactionRank> ranks;
+    public HashMap<String, FactionRank> ranksByName;
     
     public HashMap<UUID, FactionVault> vaults;
     public HashMap<String, FactionVault> vaultsByName;
@@ -47,7 +49,9 @@ public class Faction {
         this.options = FactionsManager.getInstance().factionManager.getFactionOptions(this.id);
         
         this.players = new HashMap<>();
+
         this.ranks = new HashMap<>();
+        this.ranksByName = new HashMap<>();
         
         this.vaults = new HashMap<>();
         this.vaultsByName = new HashMap<>();
@@ -89,6 +93,7 @@ public class Faction {
         FactionsManager.getInstance().factionManager.setFactionLeader(this.id, leader);
     }
     
+
     public void setDefaultRank(UUID rank) {
         if(this.defaultRank != null) this.defaultRank.setIsDefault(false);
 
@@ -96,6 +101,14 @@ public class Faction {
         if(this.defaultRank != null) this.defaultRank.setIsDefault(true);
     }
     
+    public void setDefaultRank(FactionRank rank) {
+        if(this.defaultRank != null) this.defaultRank.setIsDefault(false);
+
+        this.defaultRank = rank;
+        if(rank != null) rank.setIsDefault(true);
+    }
+    
+
     public void setDisplayName(String displayName) {
         FactionsManager.getInstance().factionManager.factionsNameLookup.remove(this.displayName);
 
@@ -108,6 +121,17 @@ public class Faction {
 
         FactionsManager.getInstance().factionManager.factionsNameLookup.put(this.displayName, this.id);
         FactionsManager.getInstance().factionManager.setFactionDisplayName(this.id, displayName);
+    }
+
+
+    public FactionRank getRank(UUID id) {
+        if(this.ranks.containsKey(id)) return this.ranks.get(id);
+        return null;
+    }
+
+    public FactionRank getRank(String displayName) {
+        if(this.ranksByName.containsKey(displayName)) return this.ranksByName.get(displayName);
+        return null;
     }
 
 
@@ -167,8 +191,17 @@ public class Faction {
         return this.players.containsKey(playerID);
     }
 
+
     public Boolean hasDefaultRank() {
         return this.defaultRank != null;
+    }
+
+    public Boolean hasRank(UUID id) {
+        return this.ranks.containsKey(id);
+    }
+
+    public Boolean hasRank(String displayName) {
+        return this.ranksByName.containsKey(displayName);
     }
 
     

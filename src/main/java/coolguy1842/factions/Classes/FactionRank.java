@@ -39,6 +39,7 @@ public class FactionRank {
     public Boolean getIsDefault() { return this.isDefault; }
     
     private String getPermissionsString() { return String.join(",", permissions);  }
+    public ArrayList<String> getPermissions() { return this.permissions; }
 
 
     public void setFaction(Faction faction) { 

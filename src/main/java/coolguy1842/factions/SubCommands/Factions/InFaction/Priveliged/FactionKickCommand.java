@@ -18,7 +18,8 @@ enum KickCommandMessages {
     NOARGS,
     SELF,
     WRONGPLAYER,
-    SUCCESS
+    SUCCESS,
+    SUCCESSTOKICKED
 }
 
 public class FactionKickCommand {
@@ -29,6 +30,7 @@ public class FactionKickCommand {
         Component.text("You cannot kick yourself."),
         Component.text("You cannot kick this player."),
         Component.text(" has been kicked from "),
+        Component.text("You have been kicked from "),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -61,6 +63,11 @@ public class FactionKickCommand {
         else {
             kickeeID = kickeeP.getUniqueId();
             kickeeDisplayName = kickeeP.displayName();
+                
+            FactionsMessaging.sendMessage(kickeeP, Globals.factionsPrefix, 
+                                                    commandMessages[KickCommandMessages.SUCCESSTOKICKED.ordinal()],
+                                                    player.getFaction().getFormattedDisplayName(),
+                                                    Component.text("."));
         }
 
         FactionPlayer kickee = FactionsManager.getInstance().playerManager.getPlayer(kickeeID);
@@ -72,10 +79,10 @@ public class FactionKickCommand {
             Player fPlayer = factionPlayer.getPlayer();
             
             FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, 
-                                                        kickeeDisplayName, 
-                                                        commandMessages[KickCommandMessages.SUCCESS.ordinal()],
-                                                        player.getFaction().getFormattedDisplayName(),
-                                                        Component.text("."));
+                                                    kickeeDisplayName, 
+                                                    commandMessages[KickCommandMessages.SUCCESS.ordinal()],
+                                                    player.getFaction().getFormattedDisplayName(),
+                                                    Component.text("."));
         }
     }
 }

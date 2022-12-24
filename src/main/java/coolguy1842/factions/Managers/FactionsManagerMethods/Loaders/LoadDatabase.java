@@ -35,8 +35,9 @@ public class LoadDatabase {
             CREATE TABLE IF NOT EXISTS `factionRanks` (
                 `id` TEXT NOT NULL PRIMARY KEY,
                 `faction` TEXT NOT NULL,
-                `default` INTEGER NOT NULL,
-                `permissions` text
+                `displayName` TEXT NOT NULL,
+                `isDefault` INTEGER NOT NULL,
+                `permissions` TEXT
             );
         """);
         

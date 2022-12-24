@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.HumanEntity;
 
+import coolguy1842.factions.Classes.Faction;
 import coolguy1842.factions.Classes.FactionVault;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Booleans.HasVault;
@@ -19,11 +20,9 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.FactionVault
 
 public class VaultManager {
     public HashMap<UUID, FactionVault> vaults;
-    public HashMap<String, UUID> vaultsNameLookup;
 
     public VaultManager() {
         this.vaults = new HashMap<>();
-        this.vaultsNameLookup = new HashMap<>();
     }
 
     public void close() {
@@ -38,10 +37,8 @@ public class VaultManager {
         }
 
         this.vaults.clear();
-        this.vaultsNameLookup.clear();
 
         this.vaults = null;
-        this.vaultsNameLookup = null;
     }
 
 
@@ -55,14 +52,14 @@ public class VaultManager {
 
     
     public void deleteVault(UUID vaultID) { DeleteFactionVault.delete(FactionsManager.getInstance(), vaultID); }
-    public void deleteVault(String displayName) { DeleteFactionVault.delete(FactionsManager.getInstance(), displayName); }
+    public void deleteVault(String displayName, Faction faction) { DeleteFactionVault.delete(FactionsManager.getInstance(), displayName, faction); }
 
 
     public FactionVault getVault(UUID vaultID) { return GetFactionVault.get(FactionsManager.getInstance(), vaultID); }
-    public FactionVault getVault(String displayName) { return GetFactionVault.get(FactionsManager.getInstance(), displayName); }
+    public FactionVault getVault(String displayName, Faction faction) { return GetFactionVault.get(FactionsManager.getInstance(), displayName, faction); }
 
     public Boolean hasVault(UUID vaultID) { return HasVault.has(FactionsManager.getInstance(), vaultID); }
-    public Boolean hasVault(String displayName) { return HasVault.has(FactionsManager.getInstance(), displayName); }
+    public Boolean hasVault(String displayName, Faction faction) { return HasVault.has(FactionsManager.getInstance(), displayName, faction); }
 
 
     public void setVaultContents(UUID vaultID, String contents) { SetFactionVaultContents.set(FactionsManager.getInstance(), vaultID, contents); }

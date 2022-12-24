@@ -85,13 +85,10 @@ public class FactionVault {
         this.saveInventory();
 
         this.faction.vaultsByName.remove(this.displayName);
-        FactionsManager.getInstance().vaultManager.vaultsNameLookup.remove(this.displayName);
-
+        
         this.displayName = displayName;
 
         this.faction.vaultsByName.put(this.displayName, this);
-        FactionsManager.getInstance().vaultManager.vaultsNameLookup.put(this.displayName, this.id);
-
         FactionsManager.getInstance().vaultManager.setVaultDisplayName(this, displayName); 
         
         this.loadInventory();

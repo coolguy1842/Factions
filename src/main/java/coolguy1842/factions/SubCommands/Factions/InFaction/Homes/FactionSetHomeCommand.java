@@ -14,7 +14,6 @@ import net.kyori.adventure.text.Component;
 enum SetHomeCommandMessages {
     NOTINFACTION,
     NOPERMISSIONS,
-    NOARGS,
     SUCCESSMODIFIED,
     SUCCESSCREATED
 }
@@ -23,9 +22,8 @@ public class FactionSetHomeCommand {
     private static Component[] commandMessages = {
         Component.text("You are not in a faction."),
         Component.text("You do not have the permissions to set homes."),
-        Component.text("You must specify a home."),
-        Component.text(" modified the home called "),
-        Component.text(" created a home called "),
+        Component.text(" modified the home \""),
+        Component.text(" created a home \""),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -37,21 +35,20 @@ public class FactionSetHomeCommand {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[SetHomeCommandMessages.NOPERMISSIONS.ordinal()]);
             return;
         }
-        else if(args.length <= 1) {
-            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[SetHomeCommandMessages.NOARGS.ordinal()]);
-            return;
-        }
+        
+        String homeName = "home";
+        if(args.length > 1) homeName = args[1];
 
-        FactionHome home = player.getFaction().getHome(args[1]);
+        FactionHome home = player.getFaction().getHome(homeName);
 
         if(home != null) {
             home.setLocation(p.getLocation());
             
-            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSMODIFIED.ordinal()], Component.text(args[1]));
+            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSMODIFIED.ordinal()], Component.text(homeName + "\"."));
         }
         else {
-            FactionsManager.getInstance().homeManager.createHome(UUID.randomUUID(), args[1], p.getLocation(), player.getFaction());
-            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSCREATED.ordinal()], Component.text(args[1]));
+            FactionsManager.getInstance().homeManager.createHome(UUID.randomUUID(), homeName, p.getLocation(), player.getFaction());
+            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSCREATED.ordinal()], Component.text(homeName + "\"."));
         }
     }
 }
