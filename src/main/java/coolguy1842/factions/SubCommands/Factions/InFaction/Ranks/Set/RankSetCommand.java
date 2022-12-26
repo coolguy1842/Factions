@@ -1,11 +1,9 @@
-package coolguy1842.factions.SubCommands.Factions.InFaction.Ranks;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Set;
 
 import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
-import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Set.RankSetDefaultCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Set.RankSetPermission;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 

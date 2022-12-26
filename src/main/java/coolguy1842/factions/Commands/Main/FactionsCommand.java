@@ -10,6 +10,8 @@ import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionAcceptCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionCreateCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionDenyCommand;
+import coolguy1842.factions.SubCommands.Factions.All.FactionsLeaderboardCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionAutoClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionClaimCommand;
@@ -17,14 +19,15 @@ import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionUnCla
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionDeleteHomeCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionHomeCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionSetHomeCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.Info.FactionBalanceCommand;
-import coolguy1842.factions.SubCommands.Factions.InFaction.Info.FactionInfoCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Money.FactionBalanceCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Money.FactionBankCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionDisbandCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionInviteCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionKickCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionRenameCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionTransferCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.FactionRankCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.RankListCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Vault.FactionVaultCommand;
 
 public class FactionsCommand implements CommandExecutor {
@@ -82,6 +85,9 @@ public class FactionsCommand implements CommandExecutor {
             case "rank":
                 FactionRankCommand.execute(p, player, args);
                 break;
+            case "ranks":
+                RankListCommand.execute(p, player, args);
+                break;
             case "accept":
                 FactionAcceptCommand.execute(p, player, args);
                 break;    
@@ -90,6 +96,9 @@ public class FactionsCommand implements CommandExecutor {
                 break;   
             case "rename":
                 FactionRenameCommand.execute(p, player, args);
+                break;
+            case "bank":
+                FactionBankCommand.execute(p, player, args);
                 break;
             case "bal": case "balance":
                 FactionBalanceCommand.execute(p, player, args);
@@ -102,6 +111,9 @@ public class FactionsCommand implements CommandExecutor {
                 break;
             case "delhome": case "deletehome":
                 FactionDeleteHomeCommand.execute(p, player, args);
+                break;
+            case "leaderboard":
+                FactionsLeaderboardCommand.execute(p, player, args);
                 break;
             default:
                 break;

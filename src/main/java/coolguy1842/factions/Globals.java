@@ -41,5 +41,8 @@ public final class Globals {
         
         rankPermissions.add("sethome");
         rankPermissions.add("delhome");
+        
+        rankPermissions.add("withdraw");
+        rankPermissions.add("deposit");
     }
 }

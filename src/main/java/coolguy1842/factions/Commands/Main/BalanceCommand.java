@@ -18,7 +18,7 @@ public class BalanceCommand implements CommandExecutor {
             Player p = (Player)sender;            
             FactionPlayer player = FactionsManager.getInstance().playerManager.getPlayer(p);
 
-            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, p.displayName(), Component.text(" balance $" + player.getMoney()));
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, Component.text("balance of "), p.displayName(), Component.text(" $" + player.getMoney()));
             return true;
         }
         

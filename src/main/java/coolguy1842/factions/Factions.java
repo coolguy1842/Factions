@@ -6,11 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import coolguy1842.factions.Commands.Main.BalanceCommand;
 import coolguy1842.factions.Commands.Main.FactionsCommand;
+import coolguy1842.factions.Commands.Main.SellCommand;
 import coolguy1842.factions.Commands.Misc.QueryCommand;
 import coolguy1842.factions.Commands.TPA.TPACommand;
 import coolguy1842.factions.Commands.TPA.TPAHereCommand;
 import coolguy1842.factions.Commands.TPA.TPAcceptCommand;
 import coolguy1842.factions.Commands.TPA.TPDenyCommand;
+import coolguy1842.factions.Events.Entity.Inventory.InventoryClose;
 import coolguy1842.factions.Events.Entity.Inventory.InventoryInteract;
 import coolguy1842.factions.Events.Entity.Player.PlayerAttack;
 import coolguy1842.factions.Events.Entity.Player.PlayerInteract;
@@ -45,6 +47,8 @@ public final class Factions extends JavaPlugin {
         this.getCommand("tpaccept").setExecutor(new TPAcceptCommand());
         this.getCommand("tpdeny").setExecutor(new TPDenyCommand());
         
+        this.getCommand("sell").setExecutor(new SellCommand());
+        
         this.getCommand("query").setExecutor(new QueryCommand());
     }
     
@@ -60,6 +64,7 @@ public final class Factions extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerAttack(), Globals.plugin);
 
         getServer().getPluginManager().registerEvents(new InventoryInteract(), Globals.plugin);
+        getServer().getPluginManager().registerEvents(new InventoryClose(), Globals.plugin);
     }
 
     @Override

@@ -6,6 +6,8 @@ import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Assigning.RankAssignCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Assigning.RankUnAssignCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Get.RankGetCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.Set.RankSetCommand;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
 

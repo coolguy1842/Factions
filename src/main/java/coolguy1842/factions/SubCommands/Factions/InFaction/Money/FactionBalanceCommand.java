@@ -1,4 +1,4 @@
-package coolguy1842.factions.SubCommands.Factions.InFaction.Info;
+package coolguy1842.factions.SubCommands.Factions.InFaction.Money;
 
 import org.bukkit.entity.Player;
 

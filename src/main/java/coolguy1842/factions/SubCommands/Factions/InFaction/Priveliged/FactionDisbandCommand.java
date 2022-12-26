@@ -34,6 +34,8 @@ public class FactionDisbandCommand {
             vault.dropAllContents(p.getLocation());
         }
 
+        player.setMoney(player.getMoney() + player.getFaction().getMoney());
+
         FactionsMessaging.broadcastMessage(Globals.factionsPrefix, player.getFaction().getFormattedDisplayName(), Component.text(" has been disbanded."));
         FactionsManager.getInstance().factionManager.deleteFaction(player.getFaction());
     }

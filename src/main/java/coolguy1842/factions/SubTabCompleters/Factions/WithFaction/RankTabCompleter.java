@@ -176,18 +176,14 @@ public class RankTabCompleter {
     }
 
 
-    public static List<String> onRankTabComplete(Player p, FactionPlayer player, Command command, String label, String[] args) {
-        ArrayList<String> out = new ArrayList<>();
-
+    public static List<String> onTabComplete(Player p, FactionPlayer player, Command command, String label, String[] args) {
         switch(args.length) {
         case 2: return Len2Complete(p, player, command, label, args);
         case 3: return Len3Complete(p, player, command, label, args);
         case 4: return Len4Complete(p, player, command, label, args);
         case 5: return Len5Complete(p, player, command, label, args);
         case 6: return Len6Complete(p, player, command, label, args);
-        default: break;
+        default: return new ArrayList<String>();
         }
-
-        return out;
     }
 }

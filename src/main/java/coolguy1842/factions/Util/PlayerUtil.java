@@ -37,6 +37,19 @@ public class PlayerUtil {
         return null;
     } 
     
+
+    public static String getPlayerUsername(UUID id) {
+        Player p = Bukkit.getPlayer(id);
+        
+        if(p != null) return p.getName();
+        
+        OfflinePlayer oP = Bukkit.getOfflinePlayer(id);
+        if(oP != null) return oP.getName();
+    
+        return null;
+    }
+
+
     public static Component getPlayerDisplayName(String exactName) {
         Player p = Bukkit.getPlayerExact(exactName);
         
@@ -48,7 +61,6 @@ public class PlayerUtil {
         return null;
     } 
     
-
     public static Component getPlayerDisplayName(UUID id) {
         Player p = Bukkit.getPlayer(id);
         

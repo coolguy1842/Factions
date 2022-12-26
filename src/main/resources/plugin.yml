@@ -11,6 +11,10 @@ commands:
         usage: /factions help
         aliases: [f, faction]
         permission: coolguy1842.factions
+    sell:
+        description: Sells item in main hand
+        usage: /sell
+        permission: coolguy1842.sell
     query:
         description: Queries database for info
         usage: /query SQL
@@ -54,4 +58,7 @@ permissions:
         default: true
     coolguy1842.tpaccept:
         description: Allows usage of the tpaccept command
+        default: true
+    coolguy1842.sell:
+        description: Allows usage of the sell command
         default: true

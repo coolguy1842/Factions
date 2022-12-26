@@ -14,6 +14,7 @@ import net.kyori.adventure.text.Component;
 enum SetHomeCommandMessages {
     NOTINFACTION,
     NOPERMISSIONS,
+    NOTENOUGHMONEY,
     SUCCESSMODIFIED,
     SUCCESSCREATED
 }
@@ -22,6 +23,7 @@ public class FactionSetHomeCommand {
     private static Component[] commandMessages = {
         Component.text("You are not in a faction."),
         Component.text("You do not have the permissions to set homes."),
+        Component.text("Your faction does not have enough money - $"),
         Component.text(" modified the home \""),
         Component.text(" created a home \""),
     }; 
@@ -46,7 +48,17 @@ public class FactionSetHomeCommand {
             
             player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSMODIFIED.ordinal()], Component.text(homeName + "\"."));
         }
-        else {
+        else {    
+            Long money = player.getFaction().homes.size() * 150L;
+            if(money > player.getFaction().getMoney()) {
+                FactionsMessaging.sendMessage(p, Globals.factionsPrefix, 
+                                                commandMessages[SetHomeCommandMessages.NOTENOUGHMONEY.ordinal()], 
+                                                Component.text(money - player.getFaction().getMoney() + "/" + money + " required."));
+                return;
+            }
+            
+            player.getFaction().setMoney(player.getFaction().getMoney() - money);
+
             FactionsManager.getInstance().homeManager.createHome(UUID.randomUUID(), homeName, p.getLocation(), player.getFaction());
             player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSCREATED.ordinal()], Component.text(homeName + "\"."));
         }

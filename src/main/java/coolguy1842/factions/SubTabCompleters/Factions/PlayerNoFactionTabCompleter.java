@@ -21,6 +21,7 @@ public class PlayerNoFactionTabCompleter {
             out.add("create");
             out.add("accept");
             out.add("deny");
+            out.add("leaderboard");
             break;
         case 2:
             if(args[0].equals("accept") || args[0].equals("deny")) {

@@ -42,12 +42,9 @@ public class VaultRemoveCommand {
         vault.dropAllContents(p.getLocation());
 
         FactionsManager.getInstance().vaultManager.deleteVault(vault.getID());
+        Long money = player.getFaction().vaults.size() * 30000L;
 
-        
-        for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
-            Player fPlayer = factionPlayer.getPlayer();
-
-            FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, p.displayName(), commandMessages[VaultRemoveCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
-        }
+        player.getFaction().setMoney(player.getFaction().getMoney() + money);
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultRemoveCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
     }
 }

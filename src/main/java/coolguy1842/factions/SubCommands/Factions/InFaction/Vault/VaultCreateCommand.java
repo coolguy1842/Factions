@@ -17,6 +17,7 @@ enum VaultCreateCommandMessages {
     NOPERMISSIONS,
     NOARGS,
     EXISTS,
+    NOTENOUGHMONEY,
     SUCCESS
 }
 
@@ -25,6 +26,7 @@ public class VaultCreateCommand {
         Component.text("You do not have the permissions to create a vault."),
         Component.text("You must specify the name."),
         Component.text("A vault already exists with this name."),
+        Component.text("Your faction does not have enough money - $"),
         Component.text(" has created a vault named ")
     }; 
     
@@ -44,12 +46,17 @@ public class VaultCreateCommand {
             return;
         }
 
+        Long money = player.getFaction().vaults.size() * 30000L;
+        if(money > player.getFaction().getMoney()) {
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, 
+                                            commandMessages[VaultCreateCommandMessages.NOTENOUGHMONEY.ordinal()], 
+                                            Component.text(money - player.getFaction().getMoney() + "/" + money + " required."));
+            return;
+        }
+
+        player.getFaction().setMoney(player.getFaction().getMoney() - money);
         FactionsManager.getInstance().vaultManager.createVault(UUID.randomUUID(), player.getFaction().getID(), args[2], emptyVaultStr);
 
-        for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
-            Player fPlayer = factionPlayer.getPlayer();
-
-            FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, p.displayName(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
-        }
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
     }
 }

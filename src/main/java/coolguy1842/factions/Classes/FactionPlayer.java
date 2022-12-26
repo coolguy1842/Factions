@@ -28,6 +28,9 @@ public class FactionPlayer {
 
     public UUID getID() { return this.id; }
 
+    public String getUsername() { return PlayerUtil.getPlayerUsername(this.id); }
+    public Boolean isOnline() { return this.getPlayer() != null; }
+
     public Component getDisplayName() { return PlayerUtil.getPlayerDisplayName(this.id); }
     public String getDisplayNameStr() { return ((TextComponent)PlayerUtil.getPlayerDisplayName(this.id)).content(); }
     

@@ -1,4 +1,4 @@
-package coolguy1842.factions.SubCommands.Factions.InFaction.Info;
+package coolguy1842.factions.SubCommands.Factions.InFaction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
