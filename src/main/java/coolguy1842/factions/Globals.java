@@ -3,6 +3,7 @@ package coolguy1842.factions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,5 +45,20 @@ public final class Globals {
         
         rankPermissions.add("withdraw");
         rankPermissions.add("deposit");
+    }
+
+    public static HashMap<Material, Long> itemPrices = new HashMap<>();
+    static {
+        itemPrices.put(Material.IRON_INGOT, 5L);
+
+        itemPrices.put(Material.GOLD_BLOCK, 81L);
+        itemPrices.put(Material.GOLD_INGOT, 9L);
+        itemPrices.put(Material.GOLD_NUGGET, 1L);
+
+        itemPrices.put(Material.EMERALD_BLOCK, 135L);
+        itemPrices.put(Material.EMERALD, 15L);
+
+        itemPrices.put(Material.DIAMOND_BLOCK, 270L);
+        itemPrices.put(Material.DIAMOND, 30L);
     }
 }

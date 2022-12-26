@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import coolguy1842.factions.Commands.Main.BalanceCommand;
 import coolguy1842.factions.Commands.Main.FactionsCommand;
+import coolguy1842.factions.Commands.Main.SellAllCommand;
 import coolguy1842.factions.Commands.Main.SellCommand;
 import coolguy1842.factions.Commands.Misc.QueryCommand;
 import coolguy1842.factions.Commands.TPA.TPACommand;
@@ -48,6 +49,7 @@ public final class Factions extends JavaPlugin {
         this.getCommand("tpdeny").setExecutor(new TPDenyCommand());
         
         this.getCommand("sell").setExecutor(new SellCommand());
+        this.getCommand("sellall").setExecutor(new SellAllCommand());
         
         this.getCommand("query").setExecutor(new QueryCommand());
     }

@@ -13,7 +13,11 @@ commands:
         permission: coolguy1842.factions
     sell:
         description: Sells item in main hand
-        usage: /sell
+        usage: /sell [Amount]
+        permission: coolguy1842.sell
+    sellall:
+        description: Sells all of the items of type from main hand in your inventory
+        usage: /sellall
         permission: coolguy1842.sell
     query:
         description: Queries database for info
