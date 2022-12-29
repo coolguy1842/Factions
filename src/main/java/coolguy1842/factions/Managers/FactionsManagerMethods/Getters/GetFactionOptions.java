@@ -9,6 +9,8 @@ import javax.sql.rowset.CachedRowSet;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class GetFactionOptions {
+    public GetFactionOptions() {}
+
     public static HashMap<String, String> get(FactionsManager manager, UUID factionID) {
         HashMap<String, String> options = new HashMap<>();
 

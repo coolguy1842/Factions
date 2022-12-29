@@ -70,6 +70,8 @@ dependencies {
 
     implementation 'org.xerial:sqlite-jdbc:3.40.0.0'
     implementation 'commons-codec:commons-codec:1.15'
+    
+    implementation files('libs/DiscordRelay.jar')
 }
 
 application {

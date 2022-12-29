@@ -6,6 +6,8 @@ import coolguy1842.factions.Classes.Faction;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class GetFaction {
+    public GetFaction() {}
+
     public static Faction get(FactionsManager manager, UUID id) {
         if(manager.factionManager.hasFaction(id)) return manager.factionManager.factions.get(id);
         

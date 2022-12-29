@@ -6,6 +6,7 @@ import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
+import coolguy1842.factions.Util.StringUtil;
 import net.kyori.adventure.text.Component;
 
 enum RenameCommandMessages {
@@ -22,7 +23,7 @@ public class FactionRenameCommand {
         Component.text("You do not have the permissions to rename this faction."),
         Component.text("You must specify a new name."),
         Component.text("That name is already taken."),
-        Component.text("Renamed the faction."),
+        Component.text(" has renamed the faction \""),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -43,7 +44,19 @@ public class FactionRenameCommand {
             return;
         }
 
+        String oldName = player.getFaction().getDisplayName();
         player.getFaction().setDisplayName(args[1]);
-        FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[RenameCommandMessages.SUCCESS.ordinal()]);
+
+        FactionsMessaging.broadcastMessage(null, Globals.factionsPrefix, 
+                                                            p.name(), 
+                                                            commandMessages[RenameCommandMessages.SUCCESS.ordinal()],
+                                                            Component.text(oldName + "\" to \"" + args[1] + "\""));
+
+        String avatar = "https://crafatar.com/avatars/" + p.getUniqueId();
+        FactionsMessaging.sendToDiscord(StringUtil.componentsToString( 
+                                                                    p.name(), 
+                                                                    commandMessages[RenameCommandMessages.SUCCESS.ordinal()],
+                                                                    Component.text(oldName + "\" to \"" + args[1] + "\"")), 
+                                                                    "[Factions]", avatar);
     }
 }

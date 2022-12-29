@@ -7,6 +7,8 @@ import coolguy1842.factions.Classes.FactionHome;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class GetHome {
+    public GetHome() {}
+
     public static FactionHome get(FactionsManager manager, UUID id) {
         if(manager.homeManager.hasHome(id)) return manager.homeManager.homes.get(id);
         return null;

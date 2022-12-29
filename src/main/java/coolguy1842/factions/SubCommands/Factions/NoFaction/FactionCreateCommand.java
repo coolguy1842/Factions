@@ -8,6 +8,7 @@ import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
+import coolguy1842.factions.Util.StringUtil;
 import net.kyori.adventure.text.Component;
 
 enum CreateCommandMessages {
@@ -22,7 +23,7 @@ public class FactionCreateCommand {
         Component.text("You must specify the name of the faction."),
         Component.text("You are already in a faction."),
         Component.text("That name is already taken."),
-        Component.text("Faction created successfully!"),
+        Component.text(" created faction \""),
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -39,7 +40,15 @@ public class FactionCreateCommand {
             return;
         }
 
+        FactionsMessaging.broadcastMessage(null, Globals.factionsPrefix, p.displayName(), commandMessages[CreateCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
+        
+        String avatar = "https://crafatar.com/avatars/" + p.getUniqueId();
+        FactionsMessaging.sendToDiscord(StringUtil.componentsToString(
+                                                                    p.displayName(), 
+                                                                    commandMessages[CreateCommandMessages.SUCCESS.ordinal()], 
+                                                                    Component.text(args[1] + "\".")), 
+                                                                    "[Factions]", avatar);
+
         FactionsManager.getInstance().factionManager.createFaction(UUID.randomUUID(), args[1], p, 0L);
-        FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[CreateCommandMessages.SUCCESS.ordinal()]);
     }
 }

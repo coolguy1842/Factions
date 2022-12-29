@@ -48,6 +48,6 @@ public class FactionDeleteHomeCommand {
         Long money = player.getFaction().homes.size() * 150L;
         player.getFaction().setMoney(player.getFaction().getMoney() + money);
 
-        player.getFaction().broadcastMessage( Globals.factionsPrefix, p.displayName(), commandMessages[DeleteHomeCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[DeleteHomeCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
     }
 }

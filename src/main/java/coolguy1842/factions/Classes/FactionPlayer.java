@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.PlayerUtil;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 
 public class FactionPlayer {
     private UUID id;
@@ -32,7 +32,7 @@ public class FactionPlayer {
     public Boolean isOnline() { return this.getPlayer() != null; }
 
     public Component getDisplayName() { return PlayerUtil.getPlayerDisplayName(this.id); }
-    public String getDisplayNameStr() { return ((TextComponent)PlayerUtil.getPlayerDisplayName(this.id)).content(); }
+    public String getDisplayNameStr() { return PlainTextComponentSerializer.plainText().serialize(this.getDisplayName()); }
     
     public Faction getFaction() { return this.faction; }
     public FactionRank getRank() { return this.rank; }

@@ -7,6 +7,7 @@ import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Classes.FactionVault;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
+import coolguy1842.factions.Util.StringUtil;
 import net.kyori.adventure.text.Component;
 
 enum DisbandCommandMessages {
@@ -36,7 +37,14 @@ public class FactionDisbandCommand {
 
         player.setMoney(player.getMoney() + player.getFaction().getMoney());
 
-        FactionsMessaging.broadcastMessage(Globals.factionsPrefix, player.getFaction().getFormattedDisplayName(), Component.text(" has been disbanded."));
+        FactionsMessaging.broadcastMessage(null, Globals.factionsPrefix, player.getFaction().getFormattedDisplayName(), Component.text(" has been disbanded."));
+        
+        String avatar = "https://crafatar.com/avatars/" + p.getUniqueId();
+        FactionsMessaging.sendToDiscord(StringUtil.componentsToString( 
+                                                                    player.getFaction().getFormattedDisplayName(), 
+                                                                    Component.text(" has been disbanded.")), 
+                                                                    "[Factions]", avatar);
+
         FactionsManager.getInstance().factionManager.deleteFaction(player.getFaction());
     }
 }
