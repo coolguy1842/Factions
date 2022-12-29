@@ -39,6 +39,18 @@ public class FactionPlayer {
 
     public Long getMoney() { return this.money; }
 
+    public void formatName() {
+        if(this.inFaction()) {
+            this.faction.formatPlayerName(this);
+            return;
+        }
+
+        Player p = this.getPlayer();
+        if(p == null) return;
+        
+        p.displayName(p.name());
+    }
+
 
     public Boolean isLeader() { 
         if(!inFaction()) return false;
@@ -81,6 +93,12 @@ public class FactionPlayer {
         this.faction = FactionsManager.getInstance().factionManager.getFaction(factionID);
         if(this.inFaction()) this.faction.players.put(this.id, this);
 
+        if(this.getPlayer() != null) {
+            Player p = this.getPlayer();
+            
+            p.displayName(PlayerUtil.getFormattedDisplayName(p));
+        }
+        
         FactionsManager.getInstance().playerManager.setPlayerFaction(this.id, factionID);
     }
 

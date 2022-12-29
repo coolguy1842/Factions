@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class PlayerJoin implements Listener {
@@ -18,5 +19,9 @@ public class PlayerJoin implements Listener {
         if(!FactionsManager.getInstance().playerManager.hasPlayer(p.getUniqueId())) {
             FactionsManager.getInstance().playerManager.createPlayer(p, 100L);
         }
+
+        FactionPlayer player = FactionsManager.getInstance().playerManager.getPlayer(p);
+
+        player.formatName();
     }
 }

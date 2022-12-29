@@ -43,8 +43,8 @@ public class LoadDatabase {
         
         manager.database.execute("""
             CREATE TABLE IF NOT EXISTS `factionOptions` (
-                `option` TEXT NOT NULL PRIMARY KEY,
                 `faction` TEXT NOT NULL,
+                `option` TEXT NOT NULL,
                 `value` TEXT NOT NULL
             );      
         """);

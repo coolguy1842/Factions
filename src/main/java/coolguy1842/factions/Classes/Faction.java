@@ -2,7 +2,6 @@ package coolguy1842.factions.Classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Chunk;
@@ -10,7 +9,9 @@ import org.bukkit.entity.Player;
 
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
+import coolguy1842.factions.Util.PlayerUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 
 public class Faction {
     private UUID id;
@@ -20,8 +21,9 @@ public class Faction {
     private FactionRank defaultRank;
     
     private Long money;
+    private TextColor color;
 
-    private HashMap<String, Object> options;
+    private HashMap<String, String> options;
 
     public HashMap<UUID, FactionPlayer> players;
 
@@ -61,6 +63,8 @@ public class Faction {
         
         this.invites = new ArrayList<>();
         this.claims = new ArrayList<>();
+
+        this.loadColor();
     }
 
     
@@ -70,8 +74,36 @@ public class Faction {
     public String getDisplayName() { return this.displayName; }
     public FactionRank getDefaultRank() { return this.defaultRank; }
     
+    public void formatPlayerName(FactionPlayer player) {
+        Player p = player.getPlayer();
+        if(p == null) return;
+
+        p.displayName(PlayerUtil.getFormattedDisplayName(p));
+    }
+
+    public void formatPlayersNames() {
+        for(FactionPlayer player : this.players.values()) {
+            this.formatPlayerName(player);
+        }
+    }
+
+    public TextColor getColor() { return this.color; }
+    public void loadColor() {
+        if(!this.options.containsKey("color")) {
+            this.color = TextColor.color(255, 255, 255);
+            return;
+        }
+
+        String[] colorStr = this.options.get("color").split(",");
+        
+        this.color = TextColor.color(Integer.parseInt(colorStr[0]), Integer.parseInt(colorStr[1]), Integer.parseInt(colorStr[2])); 
+        this.formatPlayersNames();
+    }
+    
     public Component getFormattedDisplayName() {
-        return Component.text(this.displayName); 
+        Component displayName = Component.text(this.displayName).color(this.getColor());
+        
+        return displayName;
     }
 
     public Boolean hasOnlinePlayer() {
@@ -119,6 +151,8 @@ public class Faction {
             vault.loadInventory();
         }
 
+        this.formatPlayersNames();
+
         FactionsManager.getInstance().factionManager.factionsNameLookup.put(this.displayName, this.id);
         FactionsManager.getInstance().factionManager.setFactionDisplayName(this.id, displayName);
     }
@@ -157,33 +191,22 @@ public class Faction {
     }
 
 
-    public Object getOption(String option) {
+    public String getOption(String option) {
+        if(!this.options.containsKey(option)) return null;
+
         return this.options.get(option);
     }
 
-    private String getOptionsString() {
-        String out = "";
-
-        for(Map.Entry<String, Object> entry : this.options.entrySet()) {
-            out += entry.getKey() + ":" + entry.getValue().toString();
-        }
-
-        return out;
-    }
-
-
-    public void setOption(String option, Object value) {
-        if(this.options.containsKey(option)) return;
-
+    public void setOption(String option, String value) {
         this.options.put(option, value);
-        FactionsManager.getInstance().factionManager.setFactionOptions(this.id, this.getOptionsString());
+        FactionsManager.getInstance().factionManager.setFactionOption(this.id, option, value);
     }
 
     public void removeOption(String option) {
         if(!this.options.containsKey(option)) return;
         
         this.options.remove(option);
-        FactionsManager.getInstance().factionManager.setFactionOptions(this.id, this.getOptionsString());
+        FactionsManager.getInstance().factionManager.deleteFactionOption(this.id, option);
     }
 
 

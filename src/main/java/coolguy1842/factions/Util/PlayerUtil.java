@@ -9,7 +9,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
+import coolguy1842.factions.Classes.FactionPlayer;
+import coolguy1842.factions.Managers.FactionsManager;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 
 public class PlayerUtil {
     public static void teleportPlayer(Player p, Location location) {
@@ -71,4 +74,18 @@ public class PlayerUtil {
     
         return null;
     } 
+
+
+    public static Component getFormattedDisplayName(Player p) {
+        FactionPlayer player = FactionsManager.getInstance().playerManager.getPlayer(p);
+        Component displayName = Component.empty();
+
+        if(player.inFaction()) displayName = displayName.append(
+                                                                Component.text("[").color(TextColor.color(150, 150, 150))
+                                                                .append(player.getFaction().getFormattedDisplayName())
+                                                                .append(Component.text("]"))).append(Component.text(" "));
+        displayName = displayName.append(p.name());
+
+        return displayName;
+    }
 }

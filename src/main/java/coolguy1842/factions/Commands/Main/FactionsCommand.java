@@ -25,6 +25,7 @@ import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionDis
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionInviteCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionKickCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionRenameCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionSetCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionTransferCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.FactionRankCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.RankListCommand;
@@ -84,6 +85,9 @@ public class FactionsCommand implements CommandExecutor {
                 break;
             case "rank":
                 FactionRankCommand.execute(p, player, args);
+                break;
+            case "set":
+                FactionSetCommand.execute(p, player, args);
                 break;
             case "ranks":
                 RankListCommand.execute(p, player, args);

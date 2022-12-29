@@ -47,7 +47,7 @@ public class RankTabCompleter {
             for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
                 if(!factionPlayer.hasRank()) continue;
 
-                out.add(factionPlayer.getDisplayNameStr());
+                out.add(factionPlayer.getUsername());
             }
             break;
         default: break;
@@ -100,14 +100,11 @@ public class RankTabCompleter {
 
             break;
         case "assign":
-            if(!player.getFaction().hasRank(args[2])) break;
-
             for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
                 if(factionPlayer.hasRank()) {
                     if(factionPlayer.getRank().getDisplayName().equals(args[2])) continue;
                 }
-
-                out.add(factionPlayer.getDisplayNameStr());
+                out.add(factionPlayer.getUsername());
             }    
 
             break;

@@ -6,6 +6,8 @@ public class StringUtil {
     public static String join(String delim, String... strArr) {
         String out = "";
 
+        if(strArr.length <= 0) return "";
+
         for(int i = 0; i < strArr.length - 1; i++) {
             if(strArr[i].length() <= 0) continue;
 
@@ -19,6 +21,7 @@ public class StringUtil {
     
     public static String join(String delim, ArrayList<String> strArr) {
         String out = "";
+        if(strArr.size() <= 0) return "";
 
         for(int i = 0; i < strArr.size() - 1; i++) {
             if(strArr.get(i).length() <= 0) continue;

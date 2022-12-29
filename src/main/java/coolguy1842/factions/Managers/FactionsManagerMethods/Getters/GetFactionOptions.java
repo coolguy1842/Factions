@@ -9,8 +9,8 @@ import javax.sql.rowset.CachedRowSet;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class GetFactionOptions {
-    public static HashMap<String, Object> get(FactionsManager manager, UUID factionID) {
-        HashMap<String, Object> options = new HashMap<>();
+    public static HashMap<String, String> get(FactionsManager manager, UUID factionID) {
+        HashMap<String, String> options = new HashMap<>();
 
         CachedRowSet rows = manager.database.query("SELECT * FROM factionOptions WHERE faction = ?", factionID.toString());
         if(rows == null) return options;
@@ -18,7 +18,7 @@ public class GetFactionOptions {
 
         try {
             while(rows.next()) {
-                options.put(rows.getString("option"), rows.getObject("value"));
+                options.put(rows.getString("option"), rows.getString("value"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

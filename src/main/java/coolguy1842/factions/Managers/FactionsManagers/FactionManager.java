@@ -10,13 +10,14 @@ import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Booleans.HasFaction;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Creators.CreateFaction;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Deleters.DeleteFaction;
+import coolguy1842.factions.Managers.FactionsManagerMethods.Deleters.DeleteFactionOption;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Getters.GetFaction;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Getters.GetFactionOptions;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Loaders.LoadFactions;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionDisplayName;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionLeader;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionMoney;
-import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionOptions;
+import coolguy1842.factions.Managers.FactionsManagerMethods.Setters.Faction.SetFactionOption;
 
 public class FactionManager {
     public HashMap<UUID, Faction> factions;
@@ -51,12 +52,15 @@ public class FactionManager {
     public Faction getFaction(UUID id) { return GetFaction.get(FactionsManager.getInstance(), id); }
     public Faction getFaction(String displayName) { return GetFaction.get(FactionsManager.getInstance(), displayName); }
 
-    public HashMap<String, Object> getFactionOptions(UUID factionID) { return GetFactionOptions.get(FactionsManager.getInstance(), factionID); }
-    public HashMap<String, Object> getFactionOptions(Faction faction) { return GetFactionOptions.get(FactionsManager.getInstance(), faction.getID()); }
+    public HashMap<String, String> getFactionOptions(UUID factionID) { return GetFactionOptions.get(FactionsManager.getInstance(), factionID); }
+    public HashMap<String, String> getFactionOptions(Faction faction) { return GetFactionOptions.get(FactionsManager.getInstance(), faction.getID()); }
     
     
     public void deleteFaction(Faction faction) { DeleteFaction.delete(FactionsManager.getInstance(), faction.getID()); }
     public void deleteFaction(UUID id) { DeleteFaction.delete(FactionsManager.getInstance(), id); }
+    
+    public void deleteFactionOption(Faction faction, String option) { DeleteFactionOption.delete(FactionsManager.getInstance(), option, faction.getID()); }
+    public void deleteFactionOption(UUID id, String option) { DeleteFactionOption.delete(FactionsManager.getInstance(), option, id); }
     
     
     public void setFactionMoney(Faction faction, Long money) { SetFactionMoney.set(FactionsManager.getInstance(), faction.getID(), money); }
@@ -68,7 +72,7 @@ public class FactionManager {
     public void setFactionDisplayName(Faction faction, String displayName) { SetFactionDisplayName.set(FactionsManager.getInstance(), faction.getID(), displayName); }
     public void setFactionDisplayName(UUID id, String displayName) { SetFactionDisplayName.set(FactionsManager.getInstance(), id, displayName); }
     
-    public void setFactionOptions(Faction faction, String options) { SetFactionOptions.set(FactionsManager.getInstance(), faction.getID(), options); }
-    public void setFactionOptions(UUID id, String options) { SetFactionOptions.set(FactionsManager.getInstance(), id, options); }
+    public void setFactionOption(Faction faction, String option, String value) { SetFactionOption.set(FactionsManager.getInstance(), value, option, faction.getID()); }
+    public void setFactionOption(UUID id, String option, String value) { SetFactionOption.set(FactionsManager.getInstance(), value, option, id); }
 
 }

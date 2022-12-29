@@ -45,6 +45,8 @@ public final class Globals {
         
         rankPermissions.add("withdraw");
         rankPermissions.add("deposit");
+        
+        rankPermissions.add("setcolor");
     }
 
     public static HashMap<Material, Long> itemPrices = new HashMap<>();
@@ -60,5 +62,12 @@ public final class Globals {
 
         itemPrices.put(Material.DIAMOND_BLOCK, 270L);
         itemPrices.put(Material.DIAMOND, 30L);
+    }
+
+    Long claimPrice = 10L;
+
+    public static ArrayList<String> factionOptions = new ArrayList<>();
+    static {
+        factionOptions.add("color");
     }
 }

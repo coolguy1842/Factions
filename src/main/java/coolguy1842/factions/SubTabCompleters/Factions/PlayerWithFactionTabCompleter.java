@@ -11,6 +11,7 @@ import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.BankTabComplet
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.InviteTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.KickTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.RankTabCompleter;
+import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.SetTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.TransferTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.VaultTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Homes.DelHomeTabCompleter;
@@ -51,6 +52,8 @@ public class PlayerWithFactionTabCompleter {
             out.add("bal");
             out.add("balance");
 
+            out.add("set");
+
             out.add("rank");
             out.add("ranks");
             
@@ -77,6 +80,7 @@ public class PlayerWithFactionTabCompleter {
             case "sethome": return SetHomeTabCompleter.onTabComplete(p, player, command, label, args);
             case "delhome": return DelHomeTabCompleter.onTabComplete(p, player, command, label, args);
             case "rank": return RankTabCompleter.onTabComplete(p, player, command, label, args);
+            case "set": return SetTabCompleter.onTabComplete(p, player, command, label, args);
             case "vault": return VaultTabCompleter.onTabComplete(p, player, command, label, args);
             case "bank": return BankTabCompleter.onTabComplete(p, player, command, label, args);
             default: break;
