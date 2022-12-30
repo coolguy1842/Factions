@@ -1,6 +1,5 @@
 package coolguy1842.factions.Events.Entity.Player;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -48,14 +47,13 @@ public class PlayerInteract implements Listener {
         
         Player p = e.getPlayer();
         if(p == null) return;
-        if(e.getHand() == EquipmentSlot.OFF_HAND && (p.getInventory().getItemInMainHand() == null || p.getInventory().getItemInMainHand().getType() == Material.AIR)) return;
-        
         
         Block block = e.getClickedBlock();
         if(!ChunkUtil.playerCanBlockInteractInChunk(p, block.getLocation())) {
             e.setCancelled(true);
 
             FactionClaim claim = FactionsManager.getInstance().claimManager.getClaim(block.getChunk());
+            if(e.getHand() == EquipmentSlot.OFF_HAND) return;
 
             FactionsMessaging.sendMessage(p, 
                                             Globals.factionsPrefix, 
