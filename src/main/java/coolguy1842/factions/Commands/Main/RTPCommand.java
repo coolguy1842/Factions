@@ -40,7 +40,7 @@ public class RTPCommand implements CommandExecutor {
                 
                 Material block = data.getMaterial();
                 
-                if(block.isSolid() && block.isCollidable() && !block.isEmpty() && block.isOccluding() && data2.getMaterial().isEmpty() && data3.getMaterial().isEmpty()) {
+                if(block.isSolid() && block.isCollidable() && !block.isEmpty() && block.isOccluding() && data2.getMaterial().isAir() && data3.getMaterial().isAir()) {
                     return new Location(chunk.getWorld(), (chunk.getX() << 4) + x, y + 2, (chunk.getZ() << 4) + z);
                 }
             }

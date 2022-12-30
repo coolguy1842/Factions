@@ -7,7 +7,9 @@ import coolguy1842.factions.Managers.FactionsManager;
 
 public class HasClaim {
     public static Boolean has(FactionsManager manager, Chunk chunk) {
-        if(manager.claimManager.cachedClaims.containsKey(chunk)) return manager.claimManager.cachedClaims.containsKey(chunk);
+        if(manager.claimManager.cachedClaims.containsKey(chunk)) {
+            return manager.claimManager.cachedClaims.get(chunk) != null;
+        }
 
         for(FactionClaim claim : manager.claimManager.claims.keySet()) {
             if(claim.getX() == chunk.getX() && claim.getZ() == chunk.getZ() && claim.getWorldID().equals(chunk.getWorld().getUID())) {
@@ -16,6 +18,7 @@ public class HasClaim {
             }
         }
 
+        manager.claimManager.cachedClaims.put(chunk, null);
         return false;
     }
 }

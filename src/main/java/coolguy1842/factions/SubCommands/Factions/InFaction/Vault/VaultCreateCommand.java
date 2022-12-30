@@ -15,7 +15,6 @@ import net.kyori.adventure.text.Component;
 
 enum VaultCreateCommandMessages {
     NOPERMISSIONS,
-    NOARGS,
     EXISTS,
     NOTENOUGHMONEY,
     SUCCESS
@@ -24,7 +23,6 @@ enum VaultCreateCommandMessages {
 public class VaultCreateCommand {
     private static Component[] commandMessages = {
         Component.text("You do not have the permissions to create a vault."),
-        Component.text("You must specify the name."),
         Component.text("A vault already exists with this name."),
         Component.text("Your faction does not have enough money - $"),
         Component.text(" has created a vault named ")
@@ -37,9 +35,10 @@ public class VaultCreateCommand {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCreateCommandMessages.NOPERMISSIONS.ordinal()]);
             return;
         }
-        if(args.length <= 2) {
-            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCreateCommandMessages.NOARGS.ordinal()]);
-            return;
+
+        String vaultName = "vault";
+        if(args.length > 2) {
+            vaultName = args[2];
         }
         else if(player.getFaction().hasVault(args[2])) {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCreateCommandMessages.EXISTS.ordinal()]);
@@ -55,8 +54,8 @@ public class VaultCreateCommand {
         }
 
         player.getFaction().setMoney(player.getFaction().getMoney() - money);
-        FactionsManager.getInstance().vaultManager.createVault(UUID.randomUUID(), player.getFaction().getID(), args[2], emptyVaultStr);
+        FactionsManager.getInstance().vaultManager.createVault(UUID.randomUUID(), player.getFaction().getID(), vaultName, emptyVaultStr);
 
-        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(vaultName + "."));
     }
 }

@@ -14,6 +14,9 @@ import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.RankTabComplet
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.SetTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.TransferTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.VaultTabCompleter;
+import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Ally.AllyTabCompleter;
+import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Ally.DeclineAllyTabCompleter;
+import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Ally.UnAllyTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Homes.DelHomeTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Homes.HomeTabCompleter;
 import coolguy1842.factions.SubTabCompleters.Factions.WithFaction.Homes.SetHomeTabCompleter;
@@ -27,6 +30,10 @@ public class PlayerWithFactionTabCompleter {
             if(player.isLeader()) {
                 out.add("disband");
                 out.add("transfer");
+                
+                out.add("ally");
+                out.add("unally");
+                out.add("declineally");
             }
             else {
                 out.add("leave");
@@ -44,7 +51,6 @@ public class PlayerWithFactionTabCompleter {
             }
 
             if(player.hasPermission("unclaim")) out.add("unclaim");
-            
 
             out.add("help");
             out.add("info");
@@ -83,6 +89,9 @@ public class PlayerWithFactionTabCompleter {
             case "set": return SetTabCompleter.onTabComplete(p, player, command, label, args);
             case "vault": return VaultTabCompleter.onTabComplete(p, player, command, label, args);
             case "bank": return BankTabCompleter.onTabComplete(p, player, command, label, args);
+            case "ally": return AllyTabCompleter.onTabComplete(p, player, command, label, args);
+            case "unally": return UnAllyTabCompleter.onTabComplete(p, player, command, label, args);
+            case "declineally": return DeclineAllyTabCompleter.onTabComplete(p, player, command, label, args);
             default: break;
             }
             break;

@@ -13,7 +13,7 @@ public class DeleteClaim {
 
         claim.getFaction().claims.remove(claim);
         manager.claimManager.claims.remove(claim);
-        manager.claimManager.cachedClaims.remove(chunk);
+        manager.claimManager.cachedClaims.put(chunk, null);
 
         manager.database.execute("DELETE FROM factionClaims WHERE chunk = ?", claim.getX() + "," + claim.getZ() + "," + claim.getWorld().getUID().toString());
     }

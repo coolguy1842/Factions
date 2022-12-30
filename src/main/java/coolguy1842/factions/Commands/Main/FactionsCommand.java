@@ -27,6 +27,9 @@ import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionKic
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionRenameCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionSetCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.FactionTransferCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.Ally.FactionAllyCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.Ally.FactionDeclineAllyCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Priveliged.Ally.FactionUnAllyCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.FactionRankCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Ranks.RankListCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Vault.FactionVaultCommand;
@@ -50,75 +53,32 @@ public class FactionsCommand implements CommandExecutor {
 
             // massive list (dont know any real alternatives)
             switch(args[0]) {
-            case "info":
-                FactionInfoCommand.execute(p, player, args);
-                break;
-            case "create":
-                FactionCreateCommand.execute(p, player, args);
-                break;
-            case "leave":
-                FactionLeaveCommand.execute(p, player, args);
-                break;
-            case "kick":
-                FactionKickCommand.execute(p, player, args);
-                break;
-            case "claim":
-                FactionClaimCommand.execute(p, player, args);
-                break;
-            case "autoclaim":
-                FactionAutoClaimCommand.execute(p, player, args);
-                break;
-            case "unclaim":
-                FactionUnClaimCommand.execute(p, player, args);
-                break;
-            case "disband":
-                FactionDisbandCommand.execute(p, player, args);
-                break;
-            case "transfer":
-                FactionTransferCommand.execute(p, player, args);
-                break;
-            case "invite":
-                FactionInviteCommand.execute(p, player, args);
-                break;
-            case "vault":
-                FactionVaultCommand.execute(p, player, args);
-                break;
-            case "rank":
-                FactionRankCommand.execute(p, player, args);
-                break;
-            case "set":
-                FactionSetCommand.execute(p, player, args);
-                break;
-            case "ranks":
-                RankListCommand.execute(p, player, args);
-                break;
-            case "accept":
-                FactionAcceptCommand.execute(p, player, args);
-                break;    
-            case "deny":
-                FactionDenyCommand.execute(p, player, args);
-                break;   
-            case "rename":
-                FactionRenameCommand.execute(p, player, args);
-                break;
-            case "bank":
-                FactionBankCommand.execute(p, player, args);
-                break;
-            case "bal": case "balance":
-                FactionBalanceCommand.execute(p, player, args);
-                break;
-            case "home":
-                FactionHomeCommand.execute(p, player, args);
-                break;
-            case "sethome":
-                FactionSetHomeCommand.execute(p, player, args);
-                break;
-            case "delhome": case "deletehome":
-                FactionDeleteHomeCommand.execute(p, player, args);
-                break;
-            case "leaderboard":
-                FactionsLeaderboardCommand.execute(p, player, args);
-                break;
+            case "info": FactionInfoCommand.execute(p, player, args); break;
+            case "create": FactionCreateCommand.execute(p, player, args); break;
+            case "leave": FactionLeaveCommand.execute(p, player, args); break;
+            case "kick": FactionKickCommand.execute(p, player, args); break;
+            case "claim": FactionClaimCommand.execute(p, player, args); break;
+            case "autoclaim": FactionAutoClaimCommand.execute(p, player, args); break;
+            case "unclaim": FactionUnClaimCommand.execute(p, player, args); break;
+            case "disband": FactionDisbandCommand.execute(p, player, args); break;
+            case "transfer": FactionTransferCommand.execute(p, player, args); break;
+            case "invite": FactionInviteCommand.execute(p, player, args); break;
+            case "vault": FactionVaultCommand.execute(p, player, args); break;
+            case "rank": FactionRankCommand.execute(p, player, args); break;
+            case "set": FactionSetCommand.execute(p, player, args); break;
+            case "ranks": RankListCommand.execute(p, player, args); break;
+            case "accept": FactionAcceptCommand.execute(p, player, args); break;    
+            case "deny": FactionDenyCommand.execute(p, player, args); break;   
+            case "rename": FactionRenameCommand.execute(p, player, args); break;
+            case "bank": FactionBankCommand.execute(p, player, args); break;
+            case "bal": case "balance": FactionBalanceCommand.execute(p, player, args); break;
+            case "home": FactionHomeCommand.execute(p, player, args); break;
+            case "sethome": FactionSetHomeCommand.execute(p, player, args); break;
+            case "delhome": case "deletehome": FactionDeleteHomeCommand.execute(p, player, args); break;
+            case "leaderboard": FactionsLeaderboardCommand.execute(p, player, args); break;
+            case "ally": FactionAllyCommand.execute(p, player, args); break;
+            case "unally": FactionUnAllyCommand.execute(p, player, args); break;
+            case "declineally": FactionDeclineAllyCommand.execute(p, player, args); break;
             default:
                 break;
             }

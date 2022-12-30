@@ -34,6 +34,9 @@ public class Faction {
     
     public HashMap<UUID, FactionHome> homes;
     public HashMap<String, FactionHome> homesByName;
+    
+    public ArrayList<Faction> allies;
+    public ArrayList<Faction> allyInvites;
 
     public ArrayList<UUID> invites;
     public ArrayList<FactionClaim> claims;
@@ -60,12 +63,15 @@ public class Faction {
         this.homes = new HashMap<>();
         this.homesByName = new HashMap<>();
         
+        this.allies = new ArrayList<>();
+        this.allyInvites = new ArrayList<>();
+
         this.invites = new ArrayList<>();
         this.claims = new ArrayList<>();
 
         this.loadColor();
     }
-
+    
     
     public UUID getID() { return this.id; }
     public Long getMoney() { return this.money; }
@@ -244,6 +250,15 @@ public class Faction {
         return this.homesByName.containsKey(displayName);
     }
     
+
+    public Boolean isAllied(Faction faction) {
+        return this.allies.contains(faction);
+    }
+
+    public Boolean hasAllyInvite(Faction inviter) {
+        return this.allyInvites.contains(inviter);
+    }
+
 
     public Boolean hasInvite(UUID player) {
         return this.invites.contains(player);

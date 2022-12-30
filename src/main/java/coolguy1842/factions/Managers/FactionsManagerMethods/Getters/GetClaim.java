@@ -18,6 +18,7 @@ public class GetClaim {
             }
         }
         
+        manager.claimManager.cachedClaims.put(chunk, null);
         return null;
     }
 }

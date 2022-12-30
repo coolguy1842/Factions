@@ -55,6 +55,20 @@ public class LoadDatabase {
                 `faction` TEXT NOT NULL
             );
         """);
+        
+        manager.database.execute("""
+            CREATE TABLE IF NOT EXISTS `factionAllyInvites` (
+                `inviter` TEXT NOT NULL,
+                `invited` TEXT NOT NULL
+            );
+        """);
+
+        manager.database.execute("""
+            CREATE TABLE IF NOT EXISTS `factionAllies` (
+                `faction1` TEXT NOT NULL,
+                `faction2` TEXT NOT NULL
+            );
+        """);
 
         manager.database.execute("""
             CREATE TABLE IF NOT EXISTS `factionVaults` (

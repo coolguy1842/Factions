@@ -54,4 +54,8 @@ public class FactionsMessaging {
     public static void sendToDiscord(String contents, String username, String avatar) {
         Bukkit.getScheduler().runTaskAsynchronously(Globals.plugin, () -> Bukkit.getPluginManager().callEvent(new SendToDiscordEvent(username, avatar, contents)));
     }
+
+    public static void sendToDiscord(String username, String avatar, Component... contents) {
+        Bukkit.getScheduler().runTaskAsynchronously(Globals.plugin, () -> Bukkit.getPluginManager().callEvent(new SendToDiscordEvent(username, avatar, StringUtil.componentsToString(contents))));
+    }
 }

@@ -9,14 +9,14 @@ import net.kyori.adventure.text.Component;
 
 enum VaultCommandMessages {
     NOTINFACTION,
-    NOARGS,
+    NODEFAULT,
     WRONGARG
 }
 
 public class FactionVaultCommand {    
     private static Component[] commandMessages = {
         Component.text("You are not in a faction."),
-        Component.text("You must specify what to do."),
+        Component.text("No vault named \"vault\"(default) exists."),
         Component.text("Invalid option.")
     }; 
     
@@ -26,7 +26,12 @@ public class FactionVaultCommand {
             return;
         }
         else if(args.length <= 1) {
-            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCommandMessages.NOARGS.ordinal()]);
+            if(player.getFaction().hasVault("vault")) {        
+                p.openInventory(player.getFaction().getVault("vault").getInventory());
+                return;
+            }
+
+            FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCommandMessages.NODEFAULT.ordinal()]);
             return;
         }
         
