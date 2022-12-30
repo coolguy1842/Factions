@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import coolguy1842.factions.Globals;
-import coolguy1842.factions.Classes.Faction;
+import coolguy1842.factions.Classes.FactionClaim;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.ChunkUtil;
 import coolguy1842.factions.Util.FactionsMessaging;
@@ -24,12 +24,12 @@ public class PlayerAttack implements Listener {
         if(!ChunkUtil.playerCanAttackInChunk(p, e.getAttacked().getLocation())) {
             e.setCancelled(true);
 
-            Faction chunkFaction = FactionsManager.getInstance().claimManager.getClaim(e.getAttacked().getChunk());
+            FactionClaim claim = FactionsManager.getInstance().claimManager.getClaim(e.getAttacked().getChunk());
 
             FactionsMessaging.sendMessage(p, 
                                             Globals.factionsPrefix, 
                                             Component.text("You cannot attack in a claim from "), 
-                                            chunkFaction.getFormattedDisplayName(),
+                                            claim.getFaction().getFormattedDisplayName(),
                                             Component.text("."));
         }
     }

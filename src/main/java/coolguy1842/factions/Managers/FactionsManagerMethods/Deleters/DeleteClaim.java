@@ -2,17 +2,18 @@ package coolguy1842.factions.Managers.FactionsManagerMethods.Deleters;
 
 import org.bukkit.Chunk;
 
-import coolguy1842.factions.Classes.Faction;
+import coolguy1842.factions.Classes.FactionClaim;
 import coolguy1842.factions.Managers.FactionsManager;
 
 public class DeleteClaim {
-    public static void delete(FactionsManager manager, Chunk claim) {
-        if(!manager.claimManager.hasClaim(claim)) return;
+    public static void delete(FactionsManager manager, Chunk chunk) {
+        if(!manager.claimManager.hasClaim(chunk)) return;
 
-        Faction faction = manager.claimManager.getClaim(claim);
+        FactionClaim claim = manager.claimManager.getClaim(chunk);
 
-        faction.claims.remove(claim);
+        claim.getFaction().claims.remove(claim);
         manager.claimManager.claims.remove(claim);
+        manager.claimManager.cachedClaims.remove(chunk);
 
         manager.database.execute("DELETE FROM factionClaims WHERE chunk = ?", claim.getX() + "," + claim.getZ() + "," + claim.getWorld().getUID().toString());
     }

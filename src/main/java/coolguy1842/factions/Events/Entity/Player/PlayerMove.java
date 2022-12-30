@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import coolguy1842.factions.Globals;
-import coolguy1842.factions.Classes.Faction;
+import coolguy1842.factions.Classes.FactionClaim;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
@@ -26,20 +26,20 @@ public class PlayerMove implements Listener {
     private void onPlayerMove(PlayerMoveEvent e) {         
         if(e == null) return;
         Player p = e.getPlayer();
-        Faction newChunkFaction = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());
+        FactionClaim newChunkClaim = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());
 
-        if(FactionsManager.getInstance().claimManager.playerHasAutoClaim(p) && newChunkFaction == null) {
+        if(FactionsManager.getInstance().claimManager.playerHasAutoClaim(p) && newChunkClaim == null) {
             FactionsManager.getInstance().claimManager.createClaim(p.getChunk(), FactionsManager.getInstance().playerManager.getPlayer(p).getFaction().getID());
 
-            newChunkFaction = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());          
+            newChunkClaim = FactionsManager.getInstance().claimManager.getClaim(e.getTo().getChunk());          
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, Component.text("Claimed chunk successfully."));
         } 
 
-        UUID newFactionID = (newChunkFaction == null ? null : newChunkFaction.getID());
+        UUID newFactionID = (newChunkClaim == null ? null : newChunkClaim.getFaction().getID());
 
         if(newFactionID == playerCurrentClaim.get(p)) return;
 
-        Component factionName = (newChunkFaction == null ? wilderness : newChunkFaction.getFormattedDisplayName());
+        Component factionName = (newChunkClaim == null ? wilderness : newChunkClaim.getFaction().getFormattedDisplayName());
         playerCurrentClaim.put(p, newFactionID);
 
         p.showTitle(Title.title(Component.text("Now Entering"), factionName, Times.times(Duration.ofMillis(500), Duration.ofMillis(750), Duration.ofMillis(500))));

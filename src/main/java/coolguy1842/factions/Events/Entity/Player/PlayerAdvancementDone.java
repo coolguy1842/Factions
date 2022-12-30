@@ -11,6 +11,10 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 public class PlayerAdvancementDone implements Listener {
     @EventHandler
     private void onPlayerAdvancementDone(PlayerAdvancementDoneEvent e) {
+        if(e == null) return;
+        if(e.getPlayer() == null) return;
+        if(e.message() == null) return;
+
         Player p = e.getPlayer();
 
         String contents = PlainTextComponentSerializer.plainText().serialize(p.displayName()) + " ";

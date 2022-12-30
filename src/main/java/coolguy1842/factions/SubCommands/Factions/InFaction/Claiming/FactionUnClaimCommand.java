@@ -38,7 +38,7 @@ public class FactionUnClaimCommand {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[UnClaimCommandMessages.NOTCLAIMED.ordinal()]);
             return;
         }
-        else if(!FactionsManager.getInstance().claimManager.getClaim(p.getChunk()).getID().equals(player.getFaction().getID())) {
+        else if(!FactionsManager.getInstance().claimManager.getClaim(p.getChunk()).getFaction().getID().equals(player.getFaction().getID())) {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[UnClaimCommandMessages.CLAIMEDBYOTHER.ordinal()]);
             return;
         }

@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 import coolguy1842.factions.Globals;
-import coolguy1842.factions.Classes.Faction;
+import coolguy1842.factions.Classes.FactionClaim;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.ChunkUtil;
 import coolguy1842.factions.Util.FactionsMessaging;
@@ -30,14 +30,14 @@ public class PlayerInteract implements Listener {
         if(!ChunkUtil.playerCanEntityInteractInChunk(p, entity.getLocation())) {
             e.setCancelled(true);
 
-            Faction chunkFaction = FactionsManager.getInstance().claimManager.getClaim(entity.getChunk());
+            FactionClaim claim = FactionsManager.getInstance().claimManager.getClaim(entity.getChunk());
 
             
-        if(e.getHand().equals(EquipmentSlot.HAND)) FactionsMessaging.sendMessage(p, 
-                                            Globals.factionsPrefix, 
-                                            Component.text("You cannot interact with entities in a claim from "), 
-                                            chunkFaction.getFormattedDisplayName(),
-                                            Component.text("."));
+            if(e.getHand().equals(EquipmentSlot.HAND)) FactionsMessaging.sendMessage(p, 
+                                                Globals.factionsPrefix, 
+                                                Component.text("You cannot interact with entities in a claim from "), 
+                                                claim.getFaction().getFormattedDisplayName(),
+                                                Component.text("."));
         }
     } 
 
@@ -55,12 +55,12 @@ public class PlayerInteract implements Listener {
         if(!ChunkUtil.playerCanBlockInteractInChunk(p, block.getLocation())) {
             e.setCancelled(true);
 
-            Faction chunkFaction = FactionsManager.getInstance().claimManager.getClaim(block.getChunk());
+            FactionClaim claim = FactionsManager.getInstance().claimManager.getClaim(block.getChunk());
 
             FactionsMessaging.sendMessage(p, 
                                             Globals.factionsPrefix, 
                                             Component.text("You cannot interact with blocks in a claim from "), 
-                                            chunkFaction.getFormattedDisplayName(),
+                                            claim.getFaction().getFormattedDisplayName(),
                                             Component.text("."));
         }
     } 
