@@ -103,6 +103,8 @@ public class TPAManager {
     }
 
     public void removePlayerRequest(TPARequest request) {
+        if(!tpaRequests.contains(request)) return;
+
         Component requesterMSG;
         Component requestedMSG;
         switch(request.type) {

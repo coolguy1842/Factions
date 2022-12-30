@@ -61,6 +61,7 @@ public class FactionPlayer {
     public Boolean hasPermission(String permission) {
         if(this.isLeader()) return true;
         if(!this.hasRank()) return false;
+        else if(this.rank.hasPermission("all")) return true;
 
         return this.rank.hasPermission(permission);
     }

@@ -45,6 +45,11 @@ commands:
         usage: /balance
         aliases: [bal]
         permission: coolguy1842.balance        
+    rtp:
+        description: Teleports the user to a random location
+        usage: /rtp
+        aliases:  [wild, randomtp, randomteleport]
+        permission: coolguy1842.rtp
 permissions:
     coolguy1842.query:
         description: Allows usage of /query
@@ -66,4 +71,7 @@ permissions:
         default: true
     coolguy1842.sell:
         description: Allows usage of the sell command
+        default: true
+    coolguy1842.rtp:
+        description: Allows usage of the rtp command
         default: true

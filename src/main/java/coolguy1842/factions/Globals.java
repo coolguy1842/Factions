@@ -47,6 +47,8 @@ public final class Globals {
         rankPermissions.add("deposit");
         
         rankPermissions.add("setcolor");
+        
+        rankPermissions.add("all");
     }
 
     public static HashMap<Material, Long> itemPrices = new HashMap<>();
