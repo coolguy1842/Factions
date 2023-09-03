@@ -63,7 +63,7 @@ public class RTPCommand implements CommandExecutor {
                 return;
             }
 
-            p.teleport(loc);
+            p.teleportAsync(loc);
             rtpingPlayers.remove(p);
             rtpCooldowns.put(p, System.currentTimeMillis() + 10000);
             

@@ -46,7 +46,7 @@ public class FactionTransferCommand {
         if(Bukkit.getPlayerExact(args[1]) != null) {
             Player newOwnerP = Bukkit.getPlayerExact(args[1]);
             
-            newOwnerDisplayName = newOwnerP.displayName();
+            newOwnerDisplayName = newOwnerP.name();
             newOwner = FactionsManager.getInstance().playerManager.getPlayer(newOwnerP.getUniqueId());
         }
         else if(Bukkit.getOfflinePlayer(args[1]) != null) {

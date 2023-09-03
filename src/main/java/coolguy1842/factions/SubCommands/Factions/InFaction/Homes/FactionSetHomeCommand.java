@@ -46,7 +46,7 @@ public class FactionSetHomeCommand {
         if(home != null) {
             home.setLocation(p.getLocation());
             
-            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSMODIFIED.ordinal()], Component.text(homeName + "\"."));
+            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.name(), commandMessages[SetHomeCommandMessages.SUCCESSMODIFIED.ordinal()], Component.text(homeName + "\"."));
         }
         else {    
             Long money = player.getFaction().homes.size() * 150L;
@@ -60,7 +60,7 @@ public class FactionSetHomeCommand {
             player.getFaction().setMoney(player.getFaction().getMoney() - money);
 
             FactionsManager.getInstance().homeManager.createHome(UUID.randomUUID(), homeName, p.getLocation(), player.getFaction());
-            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[SetHomeCommandMessages.SUCCESSCREATED.ordinal()], Component.text(homeName + "\"."));
+            player.getFaction().broadcastMessage(Globals.factionsPrefix, p.name(), commandMessages[SetHomeCommandMessages.SUCCESSCREATED.ordinal()], Component.text(homeName + "\"."));
         }
     }
 }

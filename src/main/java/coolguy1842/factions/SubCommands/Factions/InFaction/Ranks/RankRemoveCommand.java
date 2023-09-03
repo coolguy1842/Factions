@@ -42,7 +42,7 @@ public class RankRemoveCommand {
         FactionsManager.getInstance().rankManager.deleteRank(rank);
 
         player.getFaction().broadcastMessage(Globals.factionsPrefix,
-                                            p.displayName(),
+                                            p.name(),
                                             commandMessages[RankRemoveCommandMessages.SUCCESS.ordinal()],
                                             Component.text(rank.getDisplayName() + "\"."));
 

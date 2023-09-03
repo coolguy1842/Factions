@@ -50,7 +50,7 @@ public class FactionAcceptCommand {
             Player fPlayer = factionPlayer.getPlayer();
             
             FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, 
-                                                        p.displayName(), 
+                                                        p.name(), 
                                                         commandMessages[AcceptCommandMessages.SUCCESS.ordinal()],
                                                         player.getFaction().getFormattedDisplayName(),
                                                         Component.text("."));

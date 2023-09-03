@@ -13,7 +13,7 @@ import coolguy1842.factions.Managers.FactionsManagerMethods.Creators.CreateFacti
 import coolguy1842.factions.Managers.FactionsManagerMethods.Deleters.DeleteFactionInvite;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Getters.GetFactionPlayerInvites;
 import coolguy1842.factions.Managers.FactionsManagerMethods.Loaders.LoadFactionInvites;
-import oshi.util.tuples.Pair;
+import it.unimi.dsi.fastutil.Pair;
 
 public class InviteManager {
     public HashMap<UUID, ArrayList<UUID>> invites;

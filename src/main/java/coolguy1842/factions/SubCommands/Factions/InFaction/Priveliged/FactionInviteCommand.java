@@ -66,7 +66,7 @@ public class FactionInviteCommand {
             Player fPlayer = factionPlayer.getPlayer();
             
             FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, 
-                                                        invited.displayName(), 
+                                                        invited.name(), 
                                                         commandMessages[InviteCommandMessages.SUCCESS.ordinal()],
                                                         player.getFaction().getFormattedDisplayName(),
                                                         Component.text("."));

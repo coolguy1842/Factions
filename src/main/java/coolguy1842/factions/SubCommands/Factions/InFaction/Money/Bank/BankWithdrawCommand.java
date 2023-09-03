@@ -55,7 +55,7 @@ public class BankWithdrawCommand {
         player.setMoney(player.getMoney() + money);
 
         player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                            p.displayName(),
+                                            p.name(),
                                             commandMessages[BankWithdrawCommandMessages.SUCCESS.ordinal()],
                                             Component.text(args[2] + "."));
     } 

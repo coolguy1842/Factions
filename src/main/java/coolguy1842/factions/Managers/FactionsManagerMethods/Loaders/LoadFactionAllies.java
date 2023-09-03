@@ -7,7 +7,7 @@ import javax.sql.rowset.CachedRowSet;
 
 import coolguy1842.factions.Classes.Faction;
 import coolguy1842.factions.Managers.FactionsManager;
-import oshi.util.tuples.Pair;
+import it.unimi.dsi.fastutil.Pair;
 
 public class LoadFactionAllies {
     public static void load(FactionsManager manager) {
@@ -33,10 +33,10 @@ public class LoadFactionAllies {
         try { rows.close(); }
         catch(SQLException e) { e.printStackTrace(); }
 
-        Pair<Faction, Faction> ally = new Pair<Faction, Faction>(manager.factionManager.getFaction(faction1ID), manager.factionManager.getFaction(faction2ID));
+        Pair<Faction, Faction> ally = Pair.of(manager.factionManager.getFaction(faction1ID), manager.factionManager.getFaction(faction2ID));
 
-        ally.getA().allies.add(ally.getB());
-        ally.getB().allies.add(ally.getA());
+        ally.first().allies.add(ally.second());
+        ally.second().allies.add(ally.first());
         
         return ally;
     }

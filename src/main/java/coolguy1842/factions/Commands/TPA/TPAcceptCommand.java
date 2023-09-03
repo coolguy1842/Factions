@@ -14,7 +14,7 @@ public class TPAcceptCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
             Player p = (Player)sender;
-            TPARequest request = TPAManager.getInstance().getPlayerRequest(p);
+            TPARequest request = TPAManager.getInstance().getPlayerRequested(p);
 
             if(request == null) {
                 p.sendMessage(Component.text("You do not have any TPA requests."));

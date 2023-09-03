@@ -53,7 +53,7 @@ public class VaultRenameCommand {
         for(FactionPlayer factionPlayer : player.getFaction().players.values()) {
             Player fPlayer = factionPlayer.getPlayer();
 
-            FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, p.displayName(), commandMessages[VaultRenameCommandMessages.SUCCESS.ordinal()], 
+            FactionsMessaging.sendMessage(fPlayer, Globals.factionsPrefix, p.name(), commandMessages[VaultRenameCommandMessages.SUCCESS.ordinal()], 
             Component.text(args[2] + " to " + args[3]));
         }
     }

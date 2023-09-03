@@ -36,13 +36,13 @@ public class RankSetDefaultCommand {
         player.getFaction().setDefaultRank(rank);
         if(rank != null) {
             player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                                p.displayName(), 
+                                                p.name(), 
                                                 commandMessages[RankSetDefaultCommandMessages.SUCCESS.ordinal()], 
                                                 Component.text(rank.getDisplayName() + "\"."));
         }
         else {
             player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                                p.displayName(), 
+                                                p.name(), 
                                                 commandMessages[RankSetDefaultCommandMessages.SUCCESSNODEFAULT.ordinal()]);
         }
     }

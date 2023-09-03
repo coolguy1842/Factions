@@ -25,7 +25,7 @@ public class PlayerUtil {
 
         Entity vehicle = p.getVehicle();
         vehicle.setFallDistance(0);
-        vehicle.teleport(location, TeleportCause.PLUGIN, true, false);
+        vehicle.teleportAsync(location, null);
     }
 
 

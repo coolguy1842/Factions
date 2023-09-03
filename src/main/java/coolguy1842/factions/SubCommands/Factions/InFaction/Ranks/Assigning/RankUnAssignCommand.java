@@ -53,8 +53,8 @@ public class RankUnAssignCommand {
 
         assignedPlayer.setRank(null);
         player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                                                    p.displayName(), 
-                                                                    commandMessages[RankUnAssignCommandMessages.SUCCESS.ordinal()], 
-                                                                    assignedPlayer.getDisplayName(), Component.text("."));
+                                            p.name(), 
+                                            commandMessages[RankUnAssignCommandMessages.SUCCESS.ordinal()], 
+                                            assignedPlayer.getDisplayName(), Component.text("."));
     }
 }

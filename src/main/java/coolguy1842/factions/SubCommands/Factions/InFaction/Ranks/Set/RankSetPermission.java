@@ -72,7 +72,7 @@ public class RankSetPermission {
 
 
         player.getFaction().broadcastMessage(Globals.factionsPrefix,
-                                            p.displayName(),
+                                            p.name(),
                                             commandMessages[RankSetPermissionCommandMessages.SUCCESS.ordinal()],
                                             Component.text(permission + " of \"" + rank.getDisplayName() + "\" to " + args[5] + "."));
     }

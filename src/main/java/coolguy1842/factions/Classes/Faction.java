@@ -84,6 +84,7 @@ public class Faction {
         if(p == null) return;
 
         p.displayName(PlayerUtil.getFormattedDisplayName(p));
+        p.playerListName(p.displayName());
     }
 
     public void formatPlayersNames() {

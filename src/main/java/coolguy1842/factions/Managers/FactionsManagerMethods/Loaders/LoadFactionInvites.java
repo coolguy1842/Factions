@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import javax.sql.rowset.CachedRowSet;
 import coolguy1842.factions.Managers.FactionsManager;
-import oshi.util.tuples.Pair;
+import it.unimi.dsi.fastutil.Pair;
 
 public class LoadFactionInvites {
     public static void load(FactionsManager manager) {
@@ -32,7 +32,7 @@ public class LoadFactionInvites {
         try { rows.close(); }
         catch(SQLException e) { e.printStackTrace(); }
 
-        Pair<UUID, UUID> invite = new Pair<UUID, UUID>(id, factionID);
+        Pair<UUID, UUID> invite = Pair.of(id, factionID);
 
         if(!manager.inviteManager.invites.containsKey(id)) manager.inviteManager.invites.put(id, new ArrayList<UUID>());
         manager.inviteManager.invites.get(id).add(factionID);

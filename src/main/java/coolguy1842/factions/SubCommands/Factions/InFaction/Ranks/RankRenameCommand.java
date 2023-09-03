@@ -56,7 +56,7 @@ public class RankRenameCommand {
 
         player.getFaction().getRank(args[2]).setDisplayName(args[3]);
         player.getFaction().broadcastMessage(Globals.factionsPrefix,
-                                            p.displayName(),
+                                            p.name(),
                                             commandMessages[RankRenameCommandMessages.SUCCESS.ordinal()],
                                             Component.text(args[2] + "\" to \"" + args[3] + "\"."));
     }

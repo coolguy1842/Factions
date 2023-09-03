@@ -48,7 +48,7 @@ public class BankDepositCommand {
         player.setMoney(player.getMoney() - money);
 
         player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                            p.displayName(),
+                                            p.name(),
                                             commandMessages[BankDepositCommandMessages.SUCCESS.ordinal()],
                                             Component.text(args[2] + "."));
     } 

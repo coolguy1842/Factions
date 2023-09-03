@@ -21,12 +21,12 @@ public class TPACommand implements CommandExecutor {
             Player requested = Bukkit.getPlayerExact(args[0]);
             if(requested == null || requester == requested) return false;
 
-            if(TPAManager.getInstance().getPlayerRequest(requested) != null) {
+            if(TPAManager.getInstance().getPlayerRequested(requested) != null) {
                 requester.sendMessage(Component.text("This player already has a TPA request."));
                 return true;
             }
             
-            TPARequest request = TPAManager.getInstance().getPlayerRequest(requester);
+            TPARequest request = TPAManager.getInstance().getPlayerRequester(requester);
             if(request != null) TPAManager.getInstance().removePlayerRequest(request);
 
             TPAManager.getInstance().createPlayerRequest(requester, requested, TPARequestType.TPA, 60L * 20L);

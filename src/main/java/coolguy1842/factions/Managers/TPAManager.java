@@ -57,6 +57,26 @@ public class TPAManager {
         
         return null;
     }
+    
+    public TPARequest getPlayerRequested(Player player) {
+        for(TPARequest request : tpaRequests) {
+            if(request.requested == player) {
+                return request;
+            }
+        }
+        
+        return null;
+    }
+    
+    public TPARequest getPlayerRequester(Player player) {
+        for(TPARequest request : tpaRequests) {
+            if(request.requester == player) {
+                return request;
+            }
+        }
+        
+        return null;
+    }
 
     public TPARequest createPlayerRequest(Player requester, Player requested, TPARequestType type, Long timeOutDelay) {
         TPARequest request = new TPARequest(requester, requested, type);

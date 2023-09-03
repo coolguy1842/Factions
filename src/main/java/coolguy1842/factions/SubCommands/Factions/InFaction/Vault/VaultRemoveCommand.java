@@ -21,7 +21,7 @@ public class VaultRemoveCommand {
         Component.text("You do not have the permissions to remove vaults."),
         Component.text("You must specify the name."),
         Component.text("No vault exists with this name."),
-        Component.text(" has removed the vault named ")
+        Component.text(" removed the vault named \"")
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -45,6 +45,6 @@ public class VaultRemoveCommand {
         Long money = player.getFaction().vaults.size() * 30000L;
 
         player.getFaction().setMoney(player.getFaction().getMoney() + money);
-        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultRemoveCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "."));
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.name(), commandMessages[VaultRemoveCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "\"."));
     }
 }

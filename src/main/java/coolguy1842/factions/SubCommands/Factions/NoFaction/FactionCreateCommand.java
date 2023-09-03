@@ -40,11 +40,11 @@ public class FactionCreateCommand {
             return;
         }
 
-        FactionsMessaging.broadcastMessage(null, Globals.factionsPrefix, p.displayName(), commandMessages[CreateCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
+        FactionsMessaging.broadcastMessage(null, Globals.factionsPrefix, p.name(), commandMessages[CreateCommandMessages.SUCCESS.ordinal()], Component.text(args[1] + "\"."));
         
         String avatar = "https://crafatar.com/avatars/" + p.getUniqueId();
         FactionsMessaging.sendToDiscord(StringUtil.componentsToString(
-                                                                    p.displayName(), 
+                                                                    p.name(), 
                                                                     commandMessages[CreateCommandMessages.SUCCESS.ordinal()], 
                                                                     Component.text(args[1] + "\".")), 
                                                                     "[Factions]", avatar);

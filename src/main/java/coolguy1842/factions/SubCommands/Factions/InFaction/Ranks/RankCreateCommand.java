@@ -40,6 +40,6 @@ public class RankCreateCommand {
         }
 
         FactionsManager.getInstance().rankManager.createRank(UUID.randomUUID(), player.getFaction(), args[2], false);
-        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[RankCreateCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "\"."));
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.name(), commandMessages[RankCreateCommandMessages.SUCCESS.ordinal()], Component.text(args[2] + "\"."));
     }
 }

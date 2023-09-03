@@ -1,77 +1,85 @@
 main: coolguy1842.factions.Factions
 name: FactionsPlugin
-version: '1.0'
+version: "1.0"
 description: Another factions plugin
 load: POSTWORLD
 author: coolguy1842
 api-version: 1.19
 softdepend: [DiscordRelayPlugin]
 commands:
-    factions:
-        description: Main command for Factions
-        usage: /factions help
-        aliases: [f, faction]
-        permission: coolguy1842.factions
-    sell:
-        description: Sells item in main hand
-        usage: /sell [Amount]
-        permission: coolguy1842.sell
-    sellall:
-        description: Sells all of the items of type from main hand in your inventory
-        usage: /sellall
-        permission: coolguy1842.sell
-    query:
-        description: Queries database for info
-        usage: /query SQL
-        permission: coolguy1842.query
-    tpa:
-        description: Sends a request to tp to a player
-        usage: /tpa user
-        permission: coolguy1842.tpa
-    tpahere:
-        description: Sends a request to tp a player to you
-        usage: /tpahere user
-        permission: coolguy1842.tpa
-    tpdeny:
-        description: Denies the current tpa request if available
-        usage: /tpdeny
-        permission: coolguy1842.tpdeny
-    tpaccept:
-        description: Accepts the current tpa request if available
-        usage: /tpaccept 
-        permission: coolguy1842.tpaccept
-    balance:
-        description: Gets the players balance
-        usage: /balance
-        aliases: [bal]
-        permission: coolguy1842.balance        
-    rtp:
-        description: Teleports the user to a random location
-        usage: /rtp
-        aliases:  [wild, randomtp, randomteleport]
-        permission: coolguy1842.rtp
+  factions:
+    description: Main command for Factions
+    usage: /factions help
+    aliases: [f, faction]
+    permission: coolguy1842.factions
+  sell:
+    description: Sells item in main hand
+    usage: /sell [Amount]
+    permission: coolguy1842.sell
+  sellall:
+    description: Sells all of the items of type from main hand in your inventory
+    usage: /sellall
+    permission: coolguy1842.sell
+  query:
+    description: Queries database for info
+    usage: /query SQL
+    permission: coolguy1842.query
+  tpa:
+    description: Sends a request to tp to a player
+    usage: /tpa user
+    permission: coolguy1842.tpa
+  tpahere:
+    description: Sends a request to tp a player to you
+    usage: /tpahere user
+    permission: coolguy1842.tpa
+  tpdeny:
+    description: Denies the current tpa request if available
+    usage: /tpdeny
+    permission: coolguy1842.tpdeny
+  tpaccept:
+    description: Accepts the current tpa request if available
+    usage: /tpaccept
+    permission: coolguy1842.tpaccept
+  balance:
+    description: Gets the players balance
+    usage: /balance
+    aliases: [bal]
+    permission: coolguy1842.balance
+  rtp:
+    description: Teleports the user to a random location
+    usage: /rtp
+    aliases: [wild, randomtp, randomteleport]
+    permission: coolguy1842.rtp
+  hub:
+    description: warps to the server hub
+    usage: /hub
+    aliases: [l, lobby]
+    permission: coolguy1842.hub
 permissions:
-    coolguy1842.query:
-        description: Allows usage of /query
-        default: op
-    coolguy1842.factions:
-        description: Allows usage of the main Factions command
-        default: true
-    coolguy1842.balance:
-        description: Allows usage of the balance command
-        default: true
-    coolguy1842.tpa:
-        description: Allows usage of the tpa command
-        default: true
-    coolguy1842.tpdeny:
-        description: Allows usage of the tpdeny command
-        default: true
-    coolguy1842.tpaccept:
-        description: Allows usage of the tpaccept command
-        default: true
-    coolguy1842.sell:
-        description: Allows usage of the sell command
-        default: true
-    coolguy1842.rtp:
-        description: Allows usage of the rtp command
-        default: true
+  coolguy1842.query:
+    description: Allows usage of /query
+    default: op
+  coolguy1842.factions:
+    description: Allows usage of the main Factions command
+    default: true
+  coolguy1842.balance:
+    description: Allows usage of the balance command
+    default: true
+  coolguy1842.tpa:
+    description: Allows usage of the tpa command
+    default: true
+  coolguy1842.tpdeny:
+    description: Allows usage of the tpdeny command
+    default: true
+  coolguy1842.tpaccept:
+    description: Allows usage of the tpaccept command
+    default: true
+  coolguy1842.sell:
+    description: Allows usage of the sell command
+    default: true
+  coolguy1842.rtp:
+    description: Allows usage of the rtp command
+    default: true
+  coolguy1842.hub:
+    description: Allows usage of the hub command
+    default: true

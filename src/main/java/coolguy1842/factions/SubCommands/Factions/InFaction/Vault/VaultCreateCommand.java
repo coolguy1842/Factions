@@ -25,7 +25,7 @@ public class VaultCreateCommand {
         Component.text("You do not have the permissions to create a vault."),
         Component.text("A vault already exists with this name."),
         Component.text("Your faction does not have enough money - $"),
-        Component.text(" has created a vault named ")
+        Component.text(" created a vault named \"")
     }; 
     
     private static String emptyVaultStr = Base64Util.strToBase64(InventoryUtil.serializeInventory(Bukkit.createInventory(null, 54)));
@@ -56,6 +56,6 @@ public class VaultCreateCommand {
         player.getFaction().setMoney(player.getFaction().getMoney() - money);
         FactionsManager.getInstance().vaultManager.createVault(UUID.randomUUID(), player.getFaction().getID(), vaultName, emptyVaultStr);
 
-        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.displayName(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(vaultName + "."));
+        player.getFaction().broadcastMessage(Globals.factionsPrefix, p.name(), commandMessages[VaultCreateCommandMessages.SUCCESS.ordinal()], Component.text(vaultName + "\"."));
     }
 }

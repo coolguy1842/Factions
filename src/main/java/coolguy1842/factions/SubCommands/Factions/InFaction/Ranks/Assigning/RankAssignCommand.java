@@ -68,9 +68,9 @@ public class RankAssignCommand {
 
         assignedPlayer.setRank(player.getFaction().getRank(args[2]).getID());
         player.getFaction().broadcastMessage(Globals.factionsPrefix, 
-                                                                    p.displayName(), 
-                                                                    commandMessages[RankAssignCommandMessages.SUCCESS.ordinal()], 
-                                                                    assignedPlayer.getDisplayName(), 
-                                                                    Component.text(" to \"" + args[2] + "\"."));
+                                            p.name(), 
+                                            commandMessages[RankAssignCommandMessages.SUCCESS.ordinal()], 
+                                            assignedPlayer.getDisplayName(), 
+                                            Component.text(" to \"" + args[2] + "\"."));
     }
 }

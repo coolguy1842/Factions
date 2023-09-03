@@ -24,6 +24,8 @@ public class FactionPlayer {
         this.rank = rank;
 
         this.money = money;
+
+        this.formatName();
     }
 
     public UUID getID() { return this.id; }
@@ -49,6 +51,7 @@ public class FactionPlayer {
         if(p == null) return;
         
         p.displayName(p.name());
+        p.playerListName(p.displayName());
     }
 
 
@@ -93,14 +96,10 @@ public class FactionPlayer {
 
         this.faction = FactionsManager.getInstance().factionManager.getFaction(factionID);
         if(this.inFaction()) this.faction.players.put(this.id, this);
-
-        if(this.getPlayer() != null) {
-            Player p = this.getPlayer();
-            
-            p.displayName(PlayerUtil.getFormattedDisplayName(p));
-        }
         
         FactionsManager.getInstance().playerManager.setPlayerFaction(this.id, factionID);
+
+        this.formatName();
     }
 
     

@@ -46,7 +46,7 @@ public class SetColorCommand {
         player.getFaction().setOption("color", args[2]);
         
         FactionsMessaging.sendMessage(p, Globals.factionsPrefix, 
-                                        p.displayName(),
+                                        p.name(),
                                         commandMessages[SetColorCommandMessages.SUCCESS.ordinal()],
                                         Component.text(args[2]).color(TextColor.color(red, green, blue)));
 
