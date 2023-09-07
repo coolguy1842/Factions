@@ -40,7 +40,8 @@ public class VaultCreateCommand {
         if(args.length > 2) {
             vaultName = args[2];
         }
-        else if(player.getFaction().hasVault(args[2])) {
+        
+        if(player.getFaction().hasVault(vaultName)) {
             FactionsMessaging.sendMessage(p, Globals.factionsPrefix, commandMessages[VaultCreateCommandMessages.EXISTS.ordinal()]);
             return;
         }

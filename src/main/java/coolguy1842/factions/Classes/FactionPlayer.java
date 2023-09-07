@@ -24,8 +24,6 @@ public class FactionPlayer {
         this.rank = rank;
 
         this.money = money;
-
-        this.formatName();
     }
 
     public UUID getID() { return this.id; }
@@ -52,6 +50,13 @@ public class FactionPlayer {
         
         p.displayName(p.name());
         p.playerListName(p.displayName());
+
+
+        for(Player pl : Bukkit.getOnlinePlayers()) {
+            if(pl.getUniqueId().equals(p.getUniqueId())) continue;
+            pl.unlistPlayer(p);
+            pl.listPlayer(p);
+        }
     }
 
 

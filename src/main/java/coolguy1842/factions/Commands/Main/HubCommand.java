@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-import coolguy1842.discordrelay.Globals;
+import coolguy1842.factions.Globals;
 
 public class HubCommand implements CommandExecutor {
     @Override

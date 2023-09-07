@@ -5,11 +5,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import coolguy1842.factions.Globals;
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionAcceptCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionCreateCommand;
 import coolguy1842.factions.SubCommands.Factions.NoFaction.FactionDenyCommand;
+import coolguy1842.factions.Util.FactionsMessaging;
+import net.kyori.adventure.text.Component;
 import coolguy1842.factions.SubCommands.Factions.All.FactionsLeaderboardCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
@@ -54,6 +57,7 @@ public class FactionsCommand implements CommandExecutor {
             // massive list (dont know any real alternatives)
             switch(args[0]) {
             case "info": FactionInfoCommand.execute(p, player, args); break;
+            case "menu": break;
             case "create": FactionCreateCommand.execute(p, player, args); break;
             case "leave": FactionLeaveCommand.execute(p, player, args); break;
             case "kick": FactionKickCommand.execute(p, player, args); break;
@@ -80,6 +84,7 @@ public class FactionsCommand implements CommandExecutor {
             case "unally": FactionUnAllyCommand.execute(p, player, args); break;
             case "declineally": FactionDeclineAllyCommand.execute(p, player, args); break;
             default:
+                FactionsMessaging.sendMessage(p, Globals.factionsPrefix, Component.text("Invalid command."));
                 break;
             }
 

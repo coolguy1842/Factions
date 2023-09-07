@@ -18,7 +18,9 @@ public class LoadFactionPlayers {
 
         try {
             while(rows.next()) {
-                loadPlayer(manager, UUID.fromString(rows.getString("id")));
+                FactionPlayer fP = loadPlayer(manager, UUID.fromString(rows.getString("id")));
+                
+                fP.formatName();
             }
         } catch (SQLException e) {
             e.printStackTrace();

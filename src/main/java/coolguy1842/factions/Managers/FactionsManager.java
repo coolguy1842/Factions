@@ -55,13 +55,13 @@ public class FactionsManager {
     }
     
     public void close() {
-        homeManager.close();
-        claimManager.close();
-        inviteManager.close();
-        playerManager.close();
-        vaultManager.close();
-        rankManager.close();
-        factionManager.close();
+        if(homeManager != null) homeManager.close();
+        if(claimManager != null) claimManager.close();
+        if(inviteManager != null) inviteManager.close();
+        if(playerManager != null) playerManager.close();
+        if(vaultManager != null) vaultManager.close();
+        if(rankManager != null) rankManager.close();
+        if(factionManager != null) factionManager.close();
 
         homeManager = null;
         claimManager = null;
@@ -71,7 +71,7 @@ public class FactionsManager {
         factionManager = null;
         vaultManager = null;
         
-        database.disconnect();
+        if(database != null) database.disconnect();
         database = null;
 
         instance = null;

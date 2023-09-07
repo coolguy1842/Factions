@@ -5,12 +5,12 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
+import coolguy1842.factions.Util.TeleportUtil.BlinkTeleportUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
@@ -23,9 +23,7 @@ public class PlayerUtil {
             return;
         }
 
-        Entity vehicle = p.getVehicle();
-        vehicle.setFallDistance(0);
-        vehicle.teleportAsync(location, null);
+        BlinkTeleportUtil.teleport(p, location);
     }
 
 

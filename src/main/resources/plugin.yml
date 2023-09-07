@@ -4,7 +4,7 @@ version: "1.0"
 description: Another factions plugin
 load: POSTWORLD
 author: coolguy1842
-api-version: 1.19
+api-version: "1.20"
 softdepend: [DiscordRelayPlugin]
 commands:
   factions:
@@ -40,6 +40,9 @@ commands:
     description: Accepts the current tpa request if available
     usage: /tpaccept
     permission: coolguy1842.tpaccept
+  pay:
+    description: Pays money to the specified player
+    usage: /pay <user> <money>
   balance:
     description: Gets the players balance
     usage: /balance
@@ -55,6 +58,12 @@ commands:
     usage: /hub
     aliases: [l, lobby]
     permission: coolguy1842.hub
+  ping:
+    description: gets the users ping
+    usage: /ping <player>
+  hat:
+    description: swaps the users item in hand with helmet
+    usage: /hat
 permissions:
   coolguy1842.query:
     description: Allows usage of /query

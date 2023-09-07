@@ -65,7 +65,8 @@ public class PlayerJoin implements Listener {
         
         String username = PlainTextComponentSerializer.plainText().serialize(p.displayName());
         String avatar = "https://crafatar.com/avatars/" + e.getPlayer().getUniqueId();
-
+        
+        e.joinMessage(p.displayName().append(Component.text(" joined the game")));
         FactionsMessaging.sendToDiscord(username + " joined the game", "Server", avatar);
     }
 }

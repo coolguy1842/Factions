@@ -7,9 +7,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import coolguy1842.factions.Commands.Main.BalanceCommand;
 import coolguy1842.factions.Commands.Main.FactionsCommand;
 import coolguy1842.factions.Commands.Main.HubCommand;
+import coolguy1842.factions.Commands.Main.PayCommand;
 import coolguy1842.factions.Commands.Main.RTPCommand;
 import coolguy1842.factions.Commands.Main.SellAllCommand;
 import coolguy1842.factions.Commands.Main.SellCommand;
+import coolguy1842.factions.Commands.Misc.HatCommand;
+import coolguy1842.factions.Commands.Misc.PingCommand;
 import coolguy1842.factions.Commands.Misc.QueryCommand;
 import coolguy1842.factions.Commands.TPA.TPACommand;
 import coolguy1842.factions.Commands.TPA.TPAHereCommand;
@@ -32,16 +35,34 @@ import coolguy1842.factions.Util.FactionsLogger;
 public final class Factions extends JavaPlugin {
     @Override
     public void onEnable() {
+        init();
+
+        registerCommands();
+        registerCommandTabCompletions();
+        registerEvents();
+    }
+
+    @Override
+    public void onLoad() {
+        init();
+    }
+
+
+    void init() {
         Globals.plugin = this;
         Globals.tpaRequests = new HashMap<>();
         Globals.tpaHereRequests = new HashMap<>();
 
         FactionsLogger.info( "Started");
         FactionsManager.createInstance();
+    }
 
-        registerCommands();
-        registerCommandTabCompletions();
-        registerEvents();
+    void destroy() {
+        FactionsManager.getInstance().close();
+        
+        Globals.tpaRequests = null;
+        Globals.tpaHereRequests = null;
+        Globals.plugin = null;
     }
 
     void registerCommands() {
@@ -56,9 +77,13 @@ public final class Factions extends JavaPlugin {
         this.getCommand("rtp").setExecutor(new RTPCommand());
         this.getCommand("hub").setExecutor(new HubCommand());
         
+        this.getCommand("pay").setExecutor(new PayCommand());
         this.getCommand("sell").setExecutor(new SellCommand());
         this.getCommand("sellall").setExecutor(new SellAllCommand());
         
+        this.getCommand("ping").setExecutor(new PingCommand());
+        this.getCommand("hat").setExecutor(new HatCommand());
+
         this.getCommand("query").setExecutor(new QueryCommand());
     }
     
@@ -82,10 +107,6 @@ public final class Factions extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        FactionsManager.getInstance().close();
-        
-        Globals.tpaRequests = null;
-        Globals.tpaHereRequests = null;
-        Globals.plugin = null;
+        destroy();
     }
 }
