@@ -17,6 +17,8 @@ public class FactionPlayer {
     private FactionRank rank;
     private Long money;
     
+    private FactionMenu menu;
+    
     public FactionPlayer(UUID id, Faction faction, FactionRank rank, Long money) {
         this.id = id;
         
@@ -24,6 +26,10 @@ public class FactionPlayer {
         this.rank = rank;
 
         this.money = money;
+
+
+        this.menu = new FactionMenu(this);
+        this.menu.loadMenus();
     }
 
     public UUID getID() { return this.id; }
@@ -126,4 +132,7 @@ public class FactionPlayer {
         FactionsManager.getInstance().inviteManager.deleteAllPlayerInvites(this.id);
     }
     
+
+
+    public FactionMenu getMenu() { return this.menu; }
 }

@@ -59,17 +59,6 @@ public class FactionUnAllyCommand {
         }
 
 
-        Component[] message = {
-            Component.text("\""),
-            player.getFaction().getFormattedDisplayName(),
-            commandMessages[UnAllyCommandMessages.SUCCESS.ordinal()],
-            mentionedFaction.getFormattedDisplayName(),
-            Component.text("\"."),
-        };
-
-        FactionsManager.getInstance().factionManager.deleteFactionAlly(player.getFaction(), mentionedFaction);
-
-        FactionsMessaging.broadcastMessage(null, message);
-        FactionsMessaging.sendToDiscord(null, null, message);
+        player.getFaction().unally(mentionedFaction);
     }
 }

@@ -53,23 +53,32 @@ public final class Globals {
 
     public static HashMap<Material, Long> itemPrices = new HashMap<>();
     static {
+        itemPrices.put(Material.IRON_BLOCK, 46L);
         itemPrices.put(Material.IRON_INGOT, 5L);
 
-        itemPrices.put(Material.GOLD_BLOCK, 81L);
+        itemPrices.put(Material.GOLD_BLOCK, 82L);
         itemPrices.put(Material.GOLD_INGOT, 9L);
         itemPrices.put(Material.GOLD_NUGGET, 1L);
 
-        itemPrices.put(Material.EMERALD_BLOCK, 135L);
+        itemPrices.put(Material.EMERALD_BLOCK, 136L);
         itemPrices.put(Material.EMERALD, 15L);
 
-        itemPrices.put(Material.DIAMOND_BLOCK, 270L);
+        itemPrices.put(Material.DIAMOND_BLOCK, 271L);
         itemPrices.put(Material.DIAMOND, 30L);
     }
 
     Long claimPrice = 10L;
 
     public static ArrayList<String> factionOptions = new ArrayList<>();
-    static {
+    static {    
+        factionOptions.add("alliesCanInteractBlock");
+        factionOptions.add("alliesCanInteractEntity");
+        factionOptions.add("alliesCanAttack");
+
         factionOptions.add("color");
+
+        factionOptions.add("playersCanInteractBlock");
+        factionOptions.add("playersCanInteractEntity");
+        factionOptions.add("playersCanAttack");
     }
 }

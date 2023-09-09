@@ -16,11 +16,13 @@ import net.kyori.adventure.text.Component;
 import coolguy1842.factions.SubCommands.Factions.All.FactionsLeaderboardCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionInfoCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.FactionLeaveCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.FactionMenuCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionAutoClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Claiming.FactionUnClaimCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionDeleteHomeCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionHomeCommand;
+import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionHomeListCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Homes.FactionSetHomeCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Money.FactionBalanceCommand;
 import coolguy1842.factions.SubCommands.Factions.InFaction.Money.FactionBankCommand;
@@ -57,7 +59,7 @@ public class FactionsCommand implements CommandExecutor {
             // massive list (dont know any real alternatives)
             switch(args[0]) {
             case "info": FactionInfoCommand.execute(p, player, args); break;
-            case "menu": break;
+            case "menu": FactionMenuCommand.execute(p, player, args); break;
             case "create": FactionCreateCommand.execute(p, player, args); break;
             case "leave": FactionLeaveCommand.execute(p, player, args); break;
             case "kick": FactionKickCommand.execute(p, player, args); break;
@@ -77,6 +79,7 @@ public class FactionsCommand implements CommandExecutor {
             case "bank": FactionBankCommand.execute(p, player, args); break;
             case "bal": case "balance": FactionBalanceCommand.execute(p, player, args); break;
             case "home": FactionHomeCommand.execute(p, player, args); break;
+            case "homes": FactionHomeListCommand.execute(p, player, args); break;
             case "sethome": FactionSetHomeCommand.execute(p, player, args); break;
             case "delhome": case "deletehome": FactionDeleteHomeCommand.execute(p, player, args); break;
             case "leaderboard": FactionsLeaderboardCommand.execute(p, player, args); break;

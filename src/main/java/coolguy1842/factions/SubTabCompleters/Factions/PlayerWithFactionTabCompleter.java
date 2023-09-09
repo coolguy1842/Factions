@@ -71,7 +71,9 @@ public class PlayerWithFactionTabCompleter {
             }
 
             out.add("bank");
+            out.add("menu");
 
+            out.add("homes");
             out.add("home");
             if(player.hasPermission("sethome")) out.add("sethome");
             if(player.hasPermission("delhome")) out.add("delhome");

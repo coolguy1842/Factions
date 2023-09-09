@@ -16,6 +16,13 @@ public class InventoryClose implements Listener {
         FactionPlayer player = FactionsManager.getInstance().playerManager.getPlayer(e.getPlayer().getUniqueId());
         if(player == null || !player.inFaction()) return;
 
+        
+        if(player.getMenu().isOpen()) {
+            player.getMenu().onInventoryClose(e);
+            
+            return;
+        }
+
         for(FactionVault vault : player.getFaction().vaults.values()) {
             if(vault.getInventory() == e.getInventory()) {
                 vault.saveInventory();

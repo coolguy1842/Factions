@@ -10,6 +10,7 @@ import coolguy1842.factions.Managers.FactionsManager;
 public class ChunkUtil {
     private static Boolean playerCanDoInChunk(FactionPlayer player, FactionClaim claim) {
         if(claim == null) return true;
+        else if(player == null) return false;
         else if(player.getFaction().getID().equals(claim.getFaction().getID())) return true;
         else if(player.getFaction().allies.contains(claim.getFaction())) return true;
         else if(claim.getFaction().hasOnlinePlayer()) return true;

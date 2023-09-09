@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import coolguy1842.factions.Globals;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
 import coolguy1842.factions.Util.PlayerUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
 
 public class Faction {
@@ -258,6 +262,93 @@ public class Faction {
 
     public Boolean hasAllyInvite(Faction inviter) {
         return this.allyInvites.contains(inviter);
+    }
+
+    public void addAllyInvite(Faction inviter) {
+        Component[] message = {
+            Globals.factionsPrefix, 
+            Bukkit.getPlayer(inviter.getLeader()).displayName(), 
+            Component.text(" has invited \""), 
+            this.getFormattedDisplayName(),
+            Component.text("\" to be allies.")
+        };
+                                
+        Component[] commandMessage = {
+            Component.text("[Accept] ")
+                .color(TextColor.color(0, 255, 0))
+                .clickEvent(ClickEvent.runCommand("/f ally " + inviter.getDisplayName()))
+                .hoverEvent(
+                    HoverEvent.showText(Component.text("Accept \"")
+                        .append(inviter.getFormattedDisplayName())
+                        .append(Component.text("\" to be your allies?"))
+                    )
+                ),
+            Component.text("[Decline]")
+                .color(TextColor.color(255, 0, 0))
+                .clickEvent(ClickEvent.runCommand("/f declineally " + inviter.getDisplayName()))
+                .hoverEvent(
+                    HoverEvent.showText(Component.text("Decline \"")
+                                        .append(inviter.getFormattedDisplayName())
+                                        .append(Component.text("\" from being your allies?"))
+                    )
+                )
+        };
+
+        FactionsManager.getInstance().factionManager.createFactionAllyInvite(inviter, this);
+
+        inviter.broadcastMessage(message);
+        this.broadcastMessage(message);
+
+        FactionsMessaging.sendMessage(this.getLeader(), commandMessage);
+    }
+
+    public void removeAllyInvite(Faction invited) {
+        Component[] message = {
+            Globals.factionsPrefix, 
+            Bukkit.getPlayer(this.getLeader()).displayName(), 
+            Component.text(" has Rescinded their invite to \""), 
+            invited.getFormattedDisplayName(),
+            Component.text("\" to be allies.")
+        };
+                                
+        FactionsManager.getInstance().factionManager.deleteFactionAllyInvite(this, invited);
+
+        invited.broadcastMessage(message);
+        this.broadcastMessage(message);
+    }
+
+    public void acceptAllyInvite(Faction inviter) {
+        Component[] message = {
+            Globals.factionsPrefix, 
+            Component.text("\""),
+            this.getFormattedDisplayName(), 
+            Component.text("\" is now allied with \""),
+            inviter.getFormattedDisplayName(),
+            Component.text("\".")
+        };
+        
+        
+        FactionsMessaging.broadcastMessage(null, message);
+        FactionsMessaging.sendToDiscord("[Factions]", null, message);
+
+        FactionsManager.getInstance().factionManager.deleteFactionAllyInvite(inviter, this);
+        FactionsManager.getInstance().factionManager.createFactionAlly(inviter, this);
+    }
+
+
+    public void unally(Faction ally) {
+        Component[] message = {
+            Component.text(""),
+            this.getFormattedDisplayName(),
+            Component.text(" is no longer allied with "),
+            ally.getFormattedDisplayName(),
+            Component.text("."),
+        };
+
+        FactionsManager.getInstance().factionManager.deleteFactionAlly(this, ally);
+
+        FactionsMessaging.broadcastMessage(null, message);
+        FactionsMessaging.sendToDiscord(null, null, message);
     }
 
 

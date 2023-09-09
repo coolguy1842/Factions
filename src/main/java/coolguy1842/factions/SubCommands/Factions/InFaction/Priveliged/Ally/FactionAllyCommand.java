@@ -8,9 +8,6 @@ import coolguy1842.factions.Classes.FactionPlayer;
 import coolguy1842.factions.Managers.FactionsManager;
 import coolguy1842.factions.Util.FactionsMessaging;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.TextColor;
 
 enum AllyCommandMessages {
     NOTINFACTION,
@@ -19,9 +16,7 @@ enum AllyCommandMessages {
     NOTEXISTS,
     OWNFACTION,
     ALREADYALLIED,
-    ALREADYINVITED,
-    ACCEPTEDINVITE,
-    SUCCESS
+    ALREADYINVITED
 }
 
 public class FactionAllyCommand {
@@ -33,8 +28,6 @@ public class FactionAllyCommand {
         Component.text("You cannot ally your own faction."),
         Component.text("You have already are allied with this faction."),
         Component.text("You have already sent an ally invite to this faction."),
-        Component.text("\" is now allied with \""),
-        Component.text(" has invited \"")
     }; 
     
     public static void execute(Player p, FactionPlayer player, String[] args) {
@@ -70,53 +63,12 @@ public class FactionAllyCommand {
         }
 
         if(player.getFaction().hasAllyInvite(mentionedFaction)) {
-            Component[] message = { Globals.factionsPrefix, 
-                Component.text("\""),
-                player.getFaction().getFormattedDisplayName(), 
-                commandMessages[AllyCommandMessages.ACCEPTEDINVITE.ordinal()], 
-                mentionedFaction.getFormattedDisplayName(),
-                Component.text("\".")};
-            
-            
-            FactionsMessaging.broadcastMessage(null, message);
-            FactionsMessaging.sendToDiscord("[Factions]", null, message);
-
-            FactionsManager.getInstance().factionManager.deleteFactionAllyInvite(mentionedFaction, player.getFaction());
-            FactionsManager.getInstance().factionManager.createFactionAlly(mentionedFaction, player.getFaction());
+            player.getFaction().acceptAllyInvite(mentionedFaction);
 
             return;
         }
         
-        Component[] message = { Globals.factionsPrefix, 
-                                p.name(), 
-                                commandMessages[AllyCommandMessages.SUCCESS.ordinal()], 
-                                mentionedFaction.getFormattedDisplayName(),
-                                Component.text("\" to be allies.")};
-                                
-        Component[] commandMessage = {
-            Component.text("[Accept] ")
-                                            .color(TextColor.color(0, 255, 0))
-                                            .clickEvent(ClickEvent.runCommand("/f ally " + player.getFaction().getDisplayName()))
-                                            .hoverEvent(
-                                                HoverEvent.showText(Component.text("Accept \"")
-                                                                    .append(player.getFaction().getFormattedDisplayName())
-                                                                    .append(Component.text("\" to be your allies?")))
-                                            ),
-            Component.text("[Decline]")
-                                            .color(TextColor.color(255, 0, 0))
-                                            .clickEvent(ClickEvent.runCommand("/f declineally " + player.getFaction().getDisplayName()))
-                                            .hoverEvent(
-                                                HoverEvent.showText(Component.text("Decline \"")
-                                                                    .append(player.getFaction().getFormattedDisplayName())
-                                                                    .append(Component.text("\" from being your allies?"))
-                                            ))
-        };
 
-        FactionsManager.getInstance().factionManager.createFactionAllyInvite(player.getFaction(), mentionedFaction);
-
-        player.getFaction().broadcastMessage(message);
-        mentionedFaction.broadcastMessage(message);
-
-        FactionsMessaging.sendMessage(mentionedFaction.getLeader(), commandMessage);
+        mentionedFaction.addAllyInvite(player.getFaction());
     }
 }

@@ -28,6 +28,7 @@ public class VaultManager {
     public void close() {
         for(FactionVault vault : vaults.values()) {
             List<HumanEntity> players = vault.getInventory().getViewers().stream().toList();
+            if(players.size() <= 0) continue;
 
             for(HumanEntity player : players) {
                 player.closeInventory();
